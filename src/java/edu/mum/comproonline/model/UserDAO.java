@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -36,5 +37,21 @@ public class UserDAO {
         return results.size();
         
         
+    }
+    /**
+     * This method gets the userID by email
+     * @param userEmail
+     * @return userID
+     * @author Nazanin
+     */
+    public Integer getUserIDByEmail(String userEmail)
+    {
+        String queryString = "select c from user_tbl c where c.userEmail=:userEmail";
+        Query query = em.createQuery(queryString);
+        query.setParameter("userEmail", query);
+        UserTbl user =(UserTbl) query.getSingleResult();
+        Integer userID = user.getUserID();
+        return userID;
+
     }
 }

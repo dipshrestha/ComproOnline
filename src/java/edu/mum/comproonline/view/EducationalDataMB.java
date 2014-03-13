@@ -15,12 +15,12 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class ApplicationMB {
+public class EducationalDataMB {
 
     /**
-     * Creates a new instance of ApplicationMB
+     * Creates a new instance of EducationalDataMB
      */
-    public ApplicationMB() {
+    public EducationalDataMB() {
     }
     
 }

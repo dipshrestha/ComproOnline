@@ -45,7 +45,16 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl>{
        return appID; 
    }
    
-   
+   public Integer getApplicationStatus(Integer appID)
+   {
+       String queryString = "select c from ApplicationTbl c where c.appID = :appID";
+       Query query = em.createQuery(queryString);
+       query.setParameter(":appID", query);
+       Object result = query.getSingleResult();
+       ApplicationTbl app = (ApplicationTbl)result;
+       Integer status = app.getAppStatus();
+       return status;
+   }
    
    
 }
