@@ -5,12 +5,11 @@
  */
 
 
-package edu.mum.comproonline.control;
-
+package edu.mum.comproonline.model;
 
 import edu.mum.comproonline.model.AbstractFacade;
+import edu.mum.comproonline.model.ToeflTbl;
 import javax.ejb.Stateless;
-import edu.mum.comproonline.model.ProfessionalexpTbl;
 import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -20,13 +19,13 @@ import javax.persistence.Query;
  * @author Nazanin
  */
 @Stateless
-public class ProfessionalExpControlBean extends AbstractFacade<ProfessionalexpTbl>{
+public class ToeflDAO extends AbstractFacade<ToeflTbl>{
 
-   @PersistenceContext(unitName = "ComproOnlinePU")
+   @PersistenceContext(unitName = "ComproPU")
    private EntityManager em;
-   public ProfessionalExpControlBean()
+   public ToeflDAO()
    {
-       super(ProfessionalexpTbl.class);
+       super(ToeflTbl.class);
    }
    
    @Override
@@ -36,15 +35,14 @@ public class ProfessionalExpControlBean extends AbstractFacade<ProfessionalexpTb
    }
    
    
-   public ProfessionalexpTbl getPersonalData(Integer appID)
+   public ToeflTbl getGreData(Integer enID)
    {
-       String queryString = "select c from professionalexp_tbl c where c.appID = :appID";
+       String queryString = "select c from toefl_tbl c where c.enID = :enID";
        Query query = em.createQuery(queryString);
-       query.setParameter(":appID", query);
+       query.setParameter(":enID", query);
        Object result = query.getSingleResult();
-       return (ProfessionalexpTbl)result;
-     
+       return (ToeflTbl)result;
    }
-   
+
    
 }

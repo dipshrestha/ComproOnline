@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package edu.mum.comproonline.control;
+package edu.mum.comproonline.model;
 
 
-import javax.ejb.Stateless;
-import edu.mum.comproonline.model.InstituteTbl;
 import edu.mum.comproonline.model.AbstractFacade;
+import edu.mum.comproonline.model.CoursesTbl;
+import javax.ejb.Stateless;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,14 +20,14 @@ import javax.persistence.Query;
  * @author Nazanin
  */
 @Stateless
-public class InstituteControlBean extends AbstractFacade<InstituteTbl> {
+public class CourseDAO extends AbstractFacade<CoursesTbl> {
 
     @PersistenceContext(unitName = "ComproOnlinePU")
     private EntityManager em;
     
-    public InstituteControlBean()
+    public CourseDAO()
     {
-        super(InstituteTbl.class);
+        super(CoursesTbl.class);
     }
     @Override
     protected EntityManager getEntityManager()
@@ -35,12 +35,12 @@ public class InstituteControlBean extends AbstractFacade<InstituteTbl> {
         return em;
     }
     
-    public List<InstituteTbl> getAllInstituesJPQL(Integer enID)
+    public List<CoursesTbl> getAllCoursesJPQL(Integer instituteID)
     {
-        String queryString = "select c from institute_tbl c where c.enID=:enID ";
+        String queryString = "select c from courses_tbl c where c.instituteID=:instituteID";
         Query query = em.createQuery(queryString);
-        query.setParameter(":enID", query);
-        List<InstituteTbl> institutes = query.getResultList();
-        return institutes;  
+        query.setParameter(":instituteID", query);
+        List<CoursesTbl> courses = query.getResultList();
+        return courses;  
     }
 }

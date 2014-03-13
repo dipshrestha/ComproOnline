@@ -4,12 +4,11 @@
  * and open the template in the editor.
  */
 
-package edu.mum.comproonline.control;
-
+package edu.mum.comproonline.model;
 
 import edu.mum.comproonline.model.AbstractFacade;
+import edu.mum.comproonline.model.GreTbl;
 import javax.ejb.Stateless;
-import edu.mum.comproonline.model.PersonaldataTbl;
 import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -19,31 +18,31 @@ import javax.persistence.Query;
  * @author Nazanin
  */
 @Stateless
-public class PersonalDataControlBean extends AbstractFacade<PersonaldataTbl>{
+public class GreDAO extends AbstractFacade<GreTbl>{
 
-   @PersistenceContext(unitName = "ComproOnlinePU")
+   @PersistenceContext(unitName = "ComproPU")
    private EntityManager em;
-   public PersonalDataControlBean()
+   public GreDAO()
    {
-       super(PersonaldataTbl.class);
+       super(GreTbl.class);
    }
    
    @Override
    protected EntityManager getEntityManager()
    {
-   return em;
+       return em;
    }
    
    
-   public PersonaldataTbl getPersonalData(Integer appID)
+   public GreTbl getGreData(Integer enID)
    {
-       String queryString = "select c from PersonaldataTbl c where c.appID = :appID";
+       String queryString = "select c from gre_tbl c where c.enID = :enID";
        Query query = em.createQuery(queryString);
-       query.setParameter(":appID", query);
+       query.setParameter(":enID", query);
        Object result = query.getSingleResult();
-       return (PersonaldataTbl)result;
+       return (GreTbl)result;
      
    }
-   
+
    
 }

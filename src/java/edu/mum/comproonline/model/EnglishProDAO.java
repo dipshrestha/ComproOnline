@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package edu.mum.comproonline.control;
+package edu.mum.comproonline.model;
 
+import edu.mum.comproonline.model.AbstractFacade;
+import edu.mum.comproonline.model.EnglishproTbl;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceUnit;
-import edu.mum.comproonline.model.EnglishproTbl;
-import edu.mum.comproonline.model.AbstractFacade;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -18,11 +18,11 @@ import javax.persistence.Query;
  * @author Nazanin
  */
 @Stateless
-public class EnglishProControlBean extends AbstractFacade<EnglishproTbl> {
-    @PersistenceUnit(unitName = "ComproOnlinePU")
+public class EnglishProDAO extends AbstractFacade<EnglishproTbl> {
+    @PersistenceUnit(unitName = "ComproPU")
     private EntityManager em;
     
-    public EnglishProControlBean()
+    public EnglishProDAO()
     {
         super(EnglishproTbl.class);
     }
@@ -35,7 +35,7 @@ public class EnglishProControlBean extends AbstractFacade<EnglishproTbl> {
     
     public EnglishproTbl getEnglishProData(Integer appID)
     {
-        String queryString = "select c from englishpro_tbl c where c.appID=:appID";
+        String queryString = "select c from EnglishproTbl c where c.appID=:appID";
         Query query = em.createQuery(queryString);
         query.setParameter(":appID", query);
         Object result = query.getSingleResult();
@@ -43,17 +43,4 @@ public class EnglishProControlBean extends AbstractFacade<EnglishproTbl> {
         
     }
     
-    public Integer getEnglishID(Integer appID)
-   {
-       String queryString = "select c from englishpro_tbl c where c.appID = :appID";
-       Query query = em.createQuery(queryString);
-       query.setParameter(":appID", query);
-       Object result = query.getSingleResult();
-       EnglishproTbl english = (EnglishproTbl)result;
-       Integer englishID = english.getEnID();
-       return englishID; 
-   }
-    
-    
 }
-
