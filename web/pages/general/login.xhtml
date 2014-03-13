@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+       <ui:composition template="../../resources/templates/mainTemplate.xhtml">
+    
+        <ui:define name="body">
+            
+<!--            login form-->
+
+ <h:form>
+     <div align="center">
+         <p:panel id="panel" style="margin-bottom:10px; width: 500px;">
+
+                   
+             <h:messages style="color: #D20005"/>
+        <p:panel>
+            <f:facet name="header">Login</f:facet>
+
+            <p>Please login here</p>
+
+            <div class="dialog">
+                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+                    <h:outputLabel for="username" style="font-size: smaller;color: #008cd9">Username</h:outputLabel>
+                    <h:inputText id="username" value="#{loginMB.username}" required="true" requiredMessage="Please enter User name"/>
+                    <h:outputLabel for="password" value="" style="font-size: smaller;color: #008cd9" >Password</h:outputLabel>
+                    <h:inputSecret id="password" value="#{loginMB.password}" required="true" requiredMessage="Please enter Password"/>
+
+                </h:panelGrid>
+                <h:outputText value="#{loginMB.errormessage}" style="color:#D20005"/>
+            </div>
+
+            <p>
+              <i>Note - </i> You may login with the username 'admin' and a blank password.
+            </p>
+
+        </p:panel>
+
+        <div class="actionButtons">
+            <h:commandButton id="submit" value="Login" action="#{loginMB.checkLogin()}"/>
+        </div>
+
+    
+     
+                </p:panel>
+         <h:outputText value="#{loginMB.errormessage}" style="color:#D20005"/>
+                   
+                   </div>
+            </h:form>
+
+<!--            login form-->
+           
+        </ui:define>
+    
+       </ui:composition>
+</html>
+
