@@ -19,7 +19,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class EnglishProDAO extends AbstractFacade<EnglishproTbl> {
-    @PersistenceUnit(unitName = "ComproPU")
+    @PersistenceUnit(unitName = "ComproOnlinePU")
     private EntityManager em;
     
     public EnglishProDAO()

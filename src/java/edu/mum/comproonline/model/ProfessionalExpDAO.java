@@ -21,7 +21,7 @@ import javax.persistence.Query;
 @Stateless
 public class ProfessionalExpDAO extends AbstractFacade<ProfessionalexpTbl>{
 
-   @PersistenceContext(unitName = "ComproPU")
+   @PersistenceContext(unitName = "ComproOnlinePU")
    private EntityManager em;
    public ProfessionalExpDAO()
    {

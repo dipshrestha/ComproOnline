@@ -21,7 +21,7 @@ import javax.persistence.Query;
 @Stateless
 public class IeltsDAO extends AbstractFacade<IeltsTbl>{
 
-   @PersistenceContext(unitName = "ComproPU")
+   @PersistenceContext(unitName = "ComproOnlinePU")
    private EntityManager em;
    public IeltsDAO()
    {

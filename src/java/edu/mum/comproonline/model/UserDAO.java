@@ -54,4 +54,22 @@ public class UserDAO {
         return userID;
 
     }
+    
+        public void edit(UserTbl entity) {
+        em.merge(entity);
+    }
+
+    /**
+     * returns list of UserTbl,but in this case it returns only one UserTbl
+     * object
+     * @param userEmail
+     * @return 
+     */
+    public List<UserTbl> getUserTbl(String userEmail){
+    TypedQuery<UserTbl> query
+           = em.createQuery("SELECT  a FROM UserTbl a WHERE a.userEmail = '" + userEmail + "'", UserTbl.class);
+        List<UserTbl> results = query.getResultList();
+        //if(results==null){return null;}
+        return results ;
+    }
 }

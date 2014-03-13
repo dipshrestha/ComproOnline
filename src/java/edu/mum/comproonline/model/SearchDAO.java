@@ -34,14 +34,13 @@ public class SearchDAO extends AbstractFacade<ApplicationTbl> {
     public List<ApplicationTbl> searchApplication(SearchMB searchMB) {
         
         // TODO:
-        String queryString = "select a from ApplicationTbl a where 1=1 ";
+        String queryString = "select a from ApplicationTbl a where 1=1";
         Query query = em.createQuery(queryString);
-        query.setParameter(":appID", query);
         Object result = query.getSingleResult();
         
         
         if(!searchMB.getEmail().isEmpty()) {
-            queryString += " AND ";
+            queryString += " AND " + "x";
         }
         if(!searchMB.getCountry().isEmpty()) {
             queryString += " AND ";

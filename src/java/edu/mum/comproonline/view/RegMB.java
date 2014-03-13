@@ -15,6 +15,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -24,9 +25,10 @@ import javax.validation.constraints.Pattern;
 @ManagedBean
 @RequestScoped
 public class RegMB {
+
     @EJB
     private RegistrationControlBean myRegContBean;
-    
+
     private String firstName;
     private String middleName;
     private String lastName;
@@ -34,12 +36,15 @@ public class RegMB {
     private String email;
     private String password;
     private String password_2;
-    private int roles=UserEnum.APPLICANT.ordinal();
+    private int roles = UserEnum.APPLICANT.ordinal();
     private int status;
     @Temporal(TemporalType.DATE)
     private Date lastLoginDate;
     @Temporal(TemporalType.DATE)
     private Date creationDate;
+    private String newPassword;
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
     public RegistrationControlBean getMyRegContBean() {
         return myRegContBean;
@@ -128,17 +133,24 @@ public class RegMB {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-   
-    public String saveRegInfo() throws Exception {
 
-        if (!(this.getPassword().equals(this.getPassword_2()))) {            
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String saveRegInfo() throws Exception {
+        if (!(this.getPassword().equals(this.getPassword_2()))) {
             FacesContext context = FacesContext.getCurrentInstance();
             FacesMessage message = new FacesMessage("passwords donot match!");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             context.addMessage("password", message);
             return null;
         }
-        if (myRegContBean.emailExists(this)) {          
+        if (myRegContBean.emailExists(this)) {
             FacesContext context = FacesContext.getCurrentInstance();
             FacesMessage message = new FacesMessage("Email is already registered!");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
@@ -146,9 +158,29 @@ public class RegMB {
             return null;
         }
         myRegContBean.saveRegInfo(this);
-      
+
         //return "index.xhtml";
         return "/pages/applicant/registrationConfirmation.xhtml";
+    }
+
+    public String resetPassword() throws Exception {
+
+        if (!(this.getNewPassword().equals(this.getPassword_2()))) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage("passwords donot match!");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage("password", message);
+            return null;
+        }
+        if (!(myRegContBean.isValidUser(session.getAttribute("susername").toString(), this))) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage("Incorrect UserName or Password!");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage("userEmail", message);
+            return null;
+        }
+        myRegContBean.resetPassword(this,session.getAttribute("susername").toString());
+        return "/pages/applicant/resetPasswordConfirmation.xhtml";
     }
 
 }

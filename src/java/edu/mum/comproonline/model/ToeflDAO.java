@@ -21,7 +21,7 @@ import javax.persistence.Query;
 @Stateless
 public class ToeflDAO extends AbstractFacade<ToeflTbl>{
 
-   @PersistenceContext(unitName = "ComproPU")
+   @PersistenceContext(unitName = "ComproOnlinePU")
    private EntityManager em;
    public ToeflDAO()
    {
