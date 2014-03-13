@@ -35,7 +35,7 @@ public class EnglishProControlBean extends AbstractFacade<EnglishproTbl> {
     
     public EnglishproTbl getEnglishProData(Integer appID)
     {
-        String queryString = "select c from EnglishproTbl c where c.appID=:appID";
+        String queryString = "select c from englishpro_tbl c where c.appID=:appID";
         Query query = em.createQuery(queryString);
         query.setParameter(":appID", query);
         Object result = query.getSingleResult();
@@ -43,4 +43,17 @@ public class EnglishProControlBean extends AbstractFacade<EnglishproTbl> {
         
     }
     
+    public Integer getEnglishID(Integer appID)
+   {
+       String queryString = "select c from englishpro_tbl c where c.appID = :appID";
+       Query query = em.createQuery(queryString);
+       query.setParameter(":appID", query);
+       Object result = query.getSingleResult();
+       EnglishproTbl english = (EnglishproTbl)result;
+       Integer englishID = english.getEnID();
+       return englishID; 
+   }
+    
+    
 }
+

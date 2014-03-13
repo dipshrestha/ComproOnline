@@ -38,7 +38,7 @@ public class ProfessionalExpControlBean extends AbstractFacade<ProfessionalexpTb
    
    public ProfessionalexpTbl getPersonalData(Integer appID)
    {
-       String queryString = "select c from ProfessionalexpTbl c where c.appID = :appID";
+       String queryString = "select c from professionalexp_tbl c where c.appID = :appID";
        Query query = em.createQuery(queryString);
        query.setParameter(":appID", query);
        Object result = query.getSingleResult();

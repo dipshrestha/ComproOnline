@@ -36,9 +36,9 @@ public class ApplicationControlBean extends AbstractFacade<ApplicationTbl>{
    
    public Integer getApplicationID(Integer userID)
    {
-       String queryString = "select c from ApplicationTbl c where c.userID = :userID";
+       String queryString = "select c from application_tbl c where c.userID = :userID";
        Query query = em.createQuery(queryString);
-       query.setParameter(":appID", query);
+       query.setParameter(":userID", query);
        Object result = query.getSingleResult();
        ApplicationTbl app = (ApplicationTbl)result;
        Integer appID = app.getAppID();
