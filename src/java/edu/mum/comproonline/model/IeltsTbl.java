@@ -44,23 +44,23 @@ public class IeltsTbl implements Serializable {
     @Column(name = "iID")
     private Integer iID;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "iSpeakingScore")
     private double iSpeakingScore;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "iReadingScore")
     private double iReadingScore;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "iWritingScore")
     private double iWritingScore;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "iListeningScore")
     private double iListeningScore;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 10)
     @Column(name = "iYearTaken")
     private String iYearTaken;
@@ -68,9 +68,9 @@ public class IeltsTbl implements Serializable {
     @NotNull
     @Column(name = "iOveralScore")
     private double iOveralScore;
-    @JoinColumn(name = "iEnglishID", referencedColumnName = "enID")
-    @ManyToOne(optional = false)
-    private EnglishproTbl iEnglishID;
+//    @JoinColumn(name = "iEnglishID", referencedColumnName = "enID")
+//    @ManyToOne(optional = false)
+//    private EnglishproTbl iEnglishID;
 
     public IeltsTbl() {
     }
@@ -145,13 +145,13 @@ public class IeltsTbl implements Serializable {
         this.iOveralScore = iOveralScore;
     }
 
-    public EnglishproTbl getIEnglishID() {
-        return iEnglishID;
-    }
-
-    public void setIEnglishID(EnglishproTbl iEnglishID) {
-        this.iEnglishID = iEnglishID;
-    }
+//    public EnglishproTbl getIEnglishID() {
+//        return iEnglishID;
+//    }
+//
+//    public void setIEnglishID(EnglishproTbl iEnglishID) {
+//        this.iEnglishID = iEnglishID;
+//    }
 
     @Override
     public int hashCode() {

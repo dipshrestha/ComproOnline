@@ -45,37 +45,37 @@ public class GreTbl implements Serializable {
     @Column(name = "gID")
     private Integer gID;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "gVerbalScore")
     private int gVerbalScore;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "gVerbalPercentile")
     private int gVerbalPercentile;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "gQuantitativeScore")
     private int gQuantitativeScore;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "gQuantitativePercentile")
     private int gQuantitativePercentile;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "gAnalyticalScore")
     private int gAnalyticalScore;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "gAnalyticalPercentile")
     private int gAnalyticalPercentile;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    //@NotNull
+    //@Size(min = 1, max = 10)
     @Column(name = "gYearTaken")
     private String gYearTaken;
-    @JoinColumn(name = "gEnglishID", referencedColumnName = "enID")
-    @ManyToOne(optional = false)
-    private EnglishproTbl gEnglishID;
+//    @JoinColumn(name = "gEnglishID", referencedColumnName = "enID")
+//    @ManyToOne(optional = false)
+//    private EnglishproTbl gEnglishID;
 
     public GreTbl() {
     }
@@ -158,14 +158,14 @@ public class GreTbl implements Serializable {
     public void setGYearTaken(String gYearTaken) {
         this.gYearTaken = gYearTaken;
     }
-
-    public EnglishproTbl getGEnglishID() {
-        return gEnglishID;
-    }
-
-    public void setGEnglishID(EnglishproTbl gEnglishID) {
-        this.gEnglishID = gEnglishID;
-    }
+//
+//    public EnglishproTbl getGEnglishID() {
+//        return gEnglishID;
+//    }
+//
+//    public void setGEnglishID(EnglishproTbl gEnglishID) {
+//        this.gEnglishID = gEnglishID;
+//    }
 
     @Override
     public int hashCode() {

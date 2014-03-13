@@ -38,11 +38,17 @@ public class EducationaldataTbl implements Serializable {
     @Basic(optional = false)
     @Column(name = "edID")
     private Integer edID;
+    
+    //@OneToMany(cascade = CascadeType.ALL)    
+    //@JoinColumn(name = "edInstituteID", referencedColumnName = "instituteID") 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "instituteEdID")
     private Collection<InstituteTbl> instituteTblCollection;
-    @JoinColumn(name = "edAppID", referencedColumnName = "appID")
-    @ManyToOne(optional = false)
-    private ApplicationTbl edAppID;
+    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "instituteEdID")
+//    private Collection<InstituteTbl> instituteTblCollection;
+//    @JoinColumn(name = "edAppID", referencedColumnName = "appID")
+//    @ManyToOne(optional = false)
+//    private ApplicationTbl edAppID;
 
     public EducationaldataTbl() {
     }
@@ -66,14 +72,14 @@ public class EducationaldataTbl implements Serializable {
     public void setInstituteTblCollection(Collection<InstituteTbl> instituteTblCollection) {
         this.instituteTblCollection = instituteTblCollection;
     }
-
-    public ApplicationTbl getEdAppID() {
-        return edAppID;
-    }
-
-    public void setEdAppID(ApplicationTbl edAppID) {
-        this.edAppID = edAppID;
-    }
+//
+//    public ApplicationTbl getEdAppID() {
+//        return edAppID;
+//    }
+//
+//    public void setEdAppID(ApplicationTbl edAppID) {
+//        this.edAppID = edAppID;
+//    }
 
     @Override
     public int hashCode() {

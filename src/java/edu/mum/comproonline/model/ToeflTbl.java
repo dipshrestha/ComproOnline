@@ -48,9 +48,9 @@ public class ToeflTbl implements Serializable {
     @NotNull
     @Column(name = "tScore")
     private double tScore;
-    @JoinColumn(name = "tEnglishID", referencedColumnName = "enID")
-    @ManyToOne(optional = false)
-    private EnglishproTbl tEnglishID;
+//    @JoinColumn(name = "tEnglishID", referencedColumnName = "enID")
+//    @ManyToOne(optional = false)
+//    private EnglishproTbl tEnglishID;
 
     public ToeflTbl() {
     }
@@ -89,13 +89,13 @@ public class ToeflTbl implements Serializable {
         this.tScore = tScore;
     }
 
-    public EnglishproTbl getTEnglishID() {
-        return tEnglishID;
-    }
-
-    public void setTEnglishID(EnglishproTbl tEnglishID) {
-        this.tEnglishID = tEnglishID;
-    }
+//    public EnglishproTbl getTEnglishID() {
+//        return tEnglishID;
+//    }
+//
+//    public void setTEnglishID(EnglishproTbl tEnglishID) {
+//        this.tEnglishID = tEnglishID;
+//    }
 
     @Override
     public int hashCode() {

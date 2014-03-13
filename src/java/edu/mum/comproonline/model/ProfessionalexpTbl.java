@@ -53,42 +53,42 @@ public class ProfessionalexpTbl implements Serializable {
     @Column(name = "pExID")
     private Integer pExID;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pExCompanyName")
     private String pExCompanyName;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pExCountry")
     private String pExCountry;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pExCity")
     private String pExCity;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pExState")
     private String pExState;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pExStartDate")
     private String pExStartDate;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pExEndDate")
     private String pExEndDate;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pExPosition")
     private String pExPosition;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pExEmploymentType")
     private String pExEmploymentType;
@@ -106,9 +106,9 @@ public class ProfessionalexpTbl implements Serializable {
     private Integer pExManagementTime;
     @Column(name = "pExOtherTime")
     private Integer pExOtherTime;
-    @JoinColumn(name = "pExAppID", referencedColumnName = "appID")
-    @ManyToOne(optional = false)
-    private ApplicationTbl pExAppID;
+    //@JoinColumn(name = "pExAppID", referencedColumnName = "appID")
+    //@ManyToOne(optional = false)
+    //private ApplicationTbl pExAppID;
 
     public ProfessionalexpTbl() {
     }
@@ -256,14 +256,15 @@ public class ProfessionalexpTbl implements Serializable {
     public void setPExOtherTime(Integer pExOtherTime) {
         this.pExOtherTime = pExOtherTime;
     }
-
-    public ApplicationTbl getPExAppID() {
-        return pExAppID;
-    }
-
-    public void setPExAppID(ApplicationTbl pExAppID) {
-        this.pExAppID = pExAppID;
-    }
+    
+//
+//    public ApplicationTbl getPExAppID() {
+//        return pExAppID;
+//    }
+//
+//    public void setPExAppID(ApplicationTbl pExAppID) {
+//        this.pExAppID = pExAppID;
+//    }
 
     @Override
     public int hashCode() {

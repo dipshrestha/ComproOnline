@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -43,26 +44,43 @@ public class EnglishproTbl implements Serializable {
     @Column(name = "enID")
     private Integer enID;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "enReadingWritingAbility")
     private int enReadingWritingAbility;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "enSpeakingAbility")
     private int enSpeakingAbility;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "enListeningAbility")
     private int enListeningAbility;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tEnglishID")
-    private Collection<ToeflTbl> toeflTblCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iEnglishID")
-    private Collection<IeltsTbl> ieltsTblCollection;
-    @JoinColumn(name = "enAppID", referencedColumnName = "appID")
-    @ManyToOne(optional = false)
-    private ApplicationTbl enAppID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gEnglishID")
-    private Collection<GreTbl> greTblCollection;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "enTID", referencedColumnName = "tId")
+    private ToeflTbl toeflTbl;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "appIID", referencedColumnName = "iID")
+    private IeltsTbl ieltsTbl;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "appGID", referencedColumnName = "gID")
+    private GreTbl greTbl;
+    
+//    @JoinColumn(name = "enAppID", referencedColumnName = "appID")
+//    @ManyToOne(optional = false)
+//    private ApplicationTbl enAppID;
+    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tEnglishID")
+//    private Collection<ToeflTbl> toeflTblCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iEnglishID")
+//    private Collection<IeltsTbl> ieltsTblCollection;
+//    @JoinColumn(name = "enAppID", referencedColumnName = "appID")
+//    @ManyToOne(optional = false)
+//    private ApplicationTbl enAppID;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gEnglishID")
+//    private Collection<GreTbl> greTblCollection;
 
     public EnglishproTbl() {
     }
@@ -110,36 +128,36 @@ public class EnglishproTbl implements Serializable {
         this.enListeningAbility = enListeningAbility;
     }
 
-    public Collection<ToeflTbl> getToeflTblCollection() {
-        return toeflTblCollection;
+    public ToeflTbl getToeflTbl() {
+        return toeflTbl;
     }
 
-    public void setToeflTblCollection(Collection<ToeflTbl> toeflTblCollection) {
-        this.toeflTblCollection = toeflTblCollection;
+    public void setToeflTbl(ToeflTbl toeflTbl) {
+        this.toeflTbl = toeflTbl;
     }
 
-    public Collection<IeltsTbl> getIeltsTblCollection() {
-        return ieltsTblCollection;
+    public IeltsTbl getIeltsTbl() {
+        return ieltsTbl;
     }
 
-    public void setIeltsTblCollection(Collection<IeltsTbl> ieltsTblCollection) {
-        this.ieltsTblCollection = ieltsTblCollection;
+    public void setIeltsTbl(IeltsTbl ieltsTbl) {
+        this.ieltsTbl = ieltsTbl;
     }
 
-    public ApplicationTbl getEnAppID() {
-        return enAppID;
+//    public ApplicationTbl getEnAppID() {
+//        return enAppID;
+//    }
+//
+//    public void setEnAppID(ApplicationTbl enAppID) {
+//        this.enAppID = enAppID;
+//    }
+//
+    public GreTbl getGreTbl() {
+        return greTbl;
     }
 
-    public void setEnAppID(ApplicationTbl enAppID) {
-        this.enAppID = enAppID;
-    }
-
-    public Collection<GreTbl> getGreTblCollection() {
-        return greTblCollection;
-    }
-
-    public void setGreTblCollection(Collection<GreTbl> greTblCollection) {
-        this.greTblCollection = greTblCollection;
+    public void setGreTbl(GreTbl greTbl) {
+        this.greTbl = greTbl;
     }
 
     @Override

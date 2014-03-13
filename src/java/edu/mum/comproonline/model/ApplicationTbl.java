@@ -7,7 +7,6 @@
 package edu.mum.comproonline.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,10 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -47,18 +45,38 @@ public class ApplicationTbl implements Serializable {
     private int appStatus;
     @Column(name = "appScore")
     private Integer appScore;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pExAppID")
-    private Collection<ProfessionalexpTbl> professionalexpTblCollection;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "pExAppID")
+    //private Collection<ProfessionalexpTbl> professionalexpTblCollection;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "appPExID", referencedColumnName = "pExID")
+    private ProfessionalexpTbl professionalexpTbl;
+    
     @JoinColumn(name = "appUserID", referencedColumnName = "userID")
-    @ManyToOne(optional = false)
+    //@ManyToOne(optional = false)
+    @OneToOne(optional = false)
     private UserTbl appUserID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pDataAppID")
-    private Collection<PersonaldataTbl> personaldataTblCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "edAppID")
-    private Collection<EducationaldataTbl> educationaldataTblCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "enAppID")
-    private Collection<EnglishproTbl> englishproTblCollection;
+    
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pDataAppID")
+//    private Collection<PersonaldataTbl> personaldataTblCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "edAppID")
+//    private Collection<EducationaldataTbl> educationaldataTblCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "enAppID")
+//    private Collection<EnglishproTbl> englishproTblCollection;
 
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "appPDataID", referencedColumnName = "pDataID")
+    private PersonaldataTbl personaldataTbl;
+            
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "appEdID", referencedColumnName = "edId")            
+    private EducationaldataTbl educationaldataTbl;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "appEnID", referencedColumnName = "enID")
+    private EnglishproTbl englishproTbl;
+    
     public ApplicationTbl() {
     }
 
@@ -95,12 +113,20 @@ public class ApplicationTbl implements Serializable {
         this.appScore = appScore;
     }
 
-    public Collection<ProfessionalexpTbl> getProfessionalexpTblCollection() {
-        return professionalexpTblCollection;
+//    public Collection<ProfessionalexpTbl> getProfessionalexpTblCollection() {
+//        return professionalexpTblCollection;
+//    }
+//
+//    public void setProfessionalexpTblCollection(Collection<ProfessionalexpTbl> professionalexpTblCollection) {
+//        this.professionalexpTblCollection = professionalexpTblCollection;
+//    }
+    
+    public ProfessionalexpTbl getProfessionalexpTbl() {
+        return professionalexpTbl;
     }
 
-    public void setProfessionalexpTblCollection(Collection<ProfessionalexpTbl> professionalexpTblCollection) {
-        this.professionalexpTblCollection = professionalexpTblCollection;
+    public void setProfessionalexpTbl(ProfessionalexpTbl professionalexpTbl) {
+        this.professionalexpTbl = professionalexpTbl;
     }
 
     public UserTbl getAppUserID() {
@@ -111,28 +137,28 @@ public class ApplicationTbl implements Serializable {
         this.appUserID = appUserID;
     }
 
-    public Collection<PersonaldataTbl> getPersonaldataTblCollection() {
-        return personaldataTblCollection;
+    public PersonaldataTbl getPersonaldataTbl() {
+        return personaldataTbl;
     }
 
-    public void setPersonaldataTblCollection(Collection<PersonaldataTbl> personaldataTblCollection) {
-        this.personaldataTblCollection = personaldataTblCollection;
+    public void setPersonaldataTbl(PersonaldataTbl personaldataTbl) {
+        this.personaldataTbl = personaldataTbl;
     }
 
-    public Collection<EducationaldataTbl> getEducationaldataTblCollection() {
-        return educationaldataTblCollection;
+    public EducationaldataTbl getEducationaldataTbl() {
+        return educationaldataTbl;
     }
 
-    public void setEducationaldataTblCollection(Collection<EducationaldataTbl> educationaldataTblCollection) {
-        this.educationaldataTblCollection = educationaldataTblCollection;
+    public void setEducationaldataTbl(EducationaldataTbl educationaldataTbl) {
+        this.educationaldataTbl = educationaldataTbl;
     }
 
-    public Collection<EnglishproTbl> getEnglishproTblCollection() {
-        return englishproTblCollection;
+    public EnglishproTbl getEnglishproTblCollection() {
+        return englishproTbl;
     }
 
-    public void setEnglishproTblCollection(Collection<EnglishproTbl> englishproTblCollection) {
-        this.englishproTblCollection = englishproTblCollection;
+    public void setEnglishproTbl(EnglishproTbl englishproTbl) {
+        this.englishproTbl = englishproTbl;
     }
 
     @Override

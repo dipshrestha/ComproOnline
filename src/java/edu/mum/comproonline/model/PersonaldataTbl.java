@@ -54,86 +54,88 @@ public class PersonaldataTbl implements Serializable {
     @Column(name = "pDataID")
     private Integer pDataID;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pDataFirstName")
     private String pDataFirstName;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pDataLastName")
     private String pDataLastName;
+    
     @Size(max = 50)
     @Column(name = "pDataMiddleName")
     private String pDataMiddleName;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 10)
     @Column(name = "pDataGender")
     private String pDataGender;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pDataCountry")
     private String pDataCountry;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pDataHomeCountry")
     private String pDataHomeCountry;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pDataCity")
     private String pDataCity;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pDataState")
     private String pDataState;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 200)
     @Column(name = "pDataAddressLine1")
     private String pDataAddressLine1;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
+    //@NotNull
+    //@Size(min = 1, max = 200)
     @Column(name = "pDataAddressLine2")
     private String pDataAddressLine2;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    //@NotNull
+    //@Size(min = 1, max = 20)
     @Column(name = "pDataZipCode")
     private String pDataZipCode;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pDataHomePhone")
     private String pDataHomePhone;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    //@NotNull
+    //@Size(min = 1, max = 50)
     @Column(name = "pDataMobilePhone")
     private String pDataMobilePhone;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    //@NotNull
+    //@Size(min = 1, max = 100)
     @Column(name = "pDataSkypeID")
     private String pDataSkypeID;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 100)
     @Column(name = "pDataEmail")
     private String pDataEmail;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "pDataVisaStatus")
     private String pDataVisaStatus;
-    @JoinColumn(name = "PDataAppID", referencedColumnName = "appID")
-    @ManyToOne(optional = false)
-    private ApplicationTbl pDataAppID;
+    
+//    @JoinColumn(name = "PDataAppID", referencedColumnName = "appID")
+//    @ManyToOne(optional = false)
+//    private ApplicationTbl pDataAppID;
 
     public PersonaldataTbl() {
     }
@@ -297,13 +299,13 @@ public class PersonaldataTbl implements Serializable {
         this.pDataVisaStatus = pDataVisaStatus;
     }
 
-    public ApplicationTbl getPDataAppID() {
-        return pDataAppID;
-    }
-
-    public void setPDataAppID(ApplicationTbl pDataAppID) {
-        this.pDataAppID = pDataAppID;
-    }
+//    public ApplicationTbl getPDataAppID() {
+//        return pDataAppID;
+//    }
+//
+//    public void setPDataAppID(ApplicationTbl pDataAppID) {
+//        this.pDataAppID = pDataAppID;
+//    }
 
     @Override
     public int hashCode() {

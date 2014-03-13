@@ -52,62 +52,62 @@ public class InstituteTbl implements Serializable {
     @Column(name = "instituteID")
     private Integer instituteID;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    //@NotNull
+    //@Size(min = 1, max = 100)
     @Column(name = "instituteName")
     private String instituteName;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 100)
     @Column(name = "instituteDegree")
     private String instituteDegree;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 100)
     @Column(name = "instituteSubject")
     private String instituteSubject;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "instituteArea")
     private String instituteArea;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "instituteCounty")
     private String instituteCounty;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 50)
     @Column(name = "instituteCity")
     private String instituteCity;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 20)
     @Column(name = "instituteStartDate")
     private String instituteStartDate;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 20)
     @Column(name = "instituteEndDate")
     private String instituteEndDate;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 20)
     @Column(name = "instituteGradingScale")
     private String instituteGradingScale;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 20)
     @Column(name = "instituteFinalGPA")
     private String instituteFinalGPA;
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Size(min = 1, max = 100)
     @Column(name = "instituteDegreeStatus")
     private String instituteDegreeStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseInsID")
-    private Collection<CoursesTbl> coursesTblCollection;
+    private Collection<CoursesTbl> coursesTblCollection;      
     @JoinColumn(name = "instituteEdID", referencedColumnName = "edID")
     @ManyToOne(optional = false)
     private EducationaldataTbl instituteEdID;
