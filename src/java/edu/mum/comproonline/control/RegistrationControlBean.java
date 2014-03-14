@@ -9,6 +9,7 @@ import edu.mum.comproonline.model.UserDAO;
 import edu.mum.comproonline.model.UserEnum;
 import edu.mum.comproonline.model.UserTbl;
 import edu.mum.comproonline.util.HashServices;
+import edu.mum.comproonline.util.RandomStringGenerator;
 import edu.mum.comproonline.view.RegMB;
 import java.util.Calendar;
 import javax.ejb.EJB;
@@ -29,21 +30,19 @@ public class RegistrationControlBean {
     UserDAO myApplicantDAO;
     HashServices myHashService;
     UserTbl oldUser;
-    
-    
+
     @EJB
     private EmailControlBean emailController;
     private String emailForemail;
     private String emailForpassword;
     private int role;
-    
-    
 
-/**
- * author Abraham
- * @param regMB
- * @throws Exception 
- */
+    /**
+     * author Abraham
+     *
+     * @param regMB
+     * @throws Exception
+     */
     public void saveRegInfo(RegMB regMB) throws Exception {
         UserTbl newAppl = new UserTbl();
         newAppl.setUserFirstName(regMB.getFirstName());
@@ -64,35 +63,39 @@ public class RegistrationControlBean {
         myApplicantDAO.create(newAppl);
 
         //System.out.println(myHashService.getPassWord());
-        emailForemail=regMB.getEmail();
-        emailForpassword=regMB.getPassword().toString();
-        role=regMB.getRoles();
+        emailForemail = regMB.getEmail();
+        emailForpassword = regMB.getPassword().toString();
+        role = regMB.getRoles();
         generateEmail();
 
     }
-/**
- * author Abraham
- * @param regMB
- * @return
- * @throws Exception 
- */
-    public boolean emailExists(RegMB regMB) throws Exception {
-        int counter = myApplicantDAO.countEmails(regMB.getEmail());
+
+    /**
+     * author Abraham
+     *
+     * @param email
+     * @return
+     * @throws Exception
+     */
+    public boolean emailExists(String email) throws Exception {
+        int counter = myApplicantDAO.countEmails(email);
         if (counter > 0) {
             return true;
         }
         return false;
 
     }
+
     /**
- * author Abraham
- * @param email
- * @param regMB
- * @return
- * @throws Exception 
- */
-    public boolean isValidUser(String email,RegMB regMB) throws Exception {
-        if (myApplicantDAO.getUserTbl(email).isEmpty()) {            
+     * author Abraham
+     *
+     * @param email
+     * @param regMB
+     * @return
+     * @throws Exception
+     */
+    public boolean isValidUser(String email, RegMB regMB) throws Exception {
+        if (myApplicantDAO.getUserTbl(email).isEmpty()) {
             return false;
         } else {
             oldUser = myApplicantDAO.getUserTbl(email).get(0);
@@ -105,36 +108,43 @@ public class RegistrationControlBean {
         return true;
 
     }
+
     /**
- * author Abraham
- * @param regMB
- * @param email
- * @throws Exception 
- */
-    public void resetPassword(RegMB regMB,String email) throws Exception {
-       // oldUser = myApplicantDAO.getUserTbl(regMB.getEmail()).get(0);
-        myHashService = new HashServices(regMB.getNewPassword());
+     * author Abraham
+     *
+     * @param newPassword
+     * @param email
+     * @throws Exception
+     */
+    public void resetPassword(String newPassword, String email) throws Exception {
+        myHashService = new HashServices(newPassword);
+        oldUser = myApplicantDAO.getUserTbl(email).get(0);
         oldUser.setUserPassword(myHashService.getMessageDigest());
         myApplicantDAO.edit(oldUser);
-        
-        emailController.generateEmailForResetPassword(email); 
-        //here send email to the user saying"Dear Applicant,we are sending you 
-        //this email because your password has been
-        //changed at 12:00pm.If you changed your password ,then you can disregard this email.
-        //But if you don't please contact us.
+
     }
-    
+
     /**
      * author Khan
      */
-    
-    public void generateEmail()
-    {
-      if(role==UserEnum.STAFF.ordinal())
-         emailController.generateEmailForNewStaffRegistration(emailForemail, emailForpassword);
-      else emailController.generateEmailForNewAppRegistration(emailForemail);
-        
-      
+    public void generateEmail() {
+        if (role == UserEnum.STAFF.ordinal()) {
+            emailController.generateEmailForNewStaffRegistration(emailForemail, emailForpassword);
+        } else {
+            emailController.generateEmailForNewAppRegistration(emailForemail);
+        }
+    }
+
+    /**
+     * author Abraham
+     *
+     * @param email
+     * @throws java.lang.Exception
+     */
+    public void retrievePassword(String email) throws Exception {
+        String newPassword = RandomStringGenerator.generateRandomString(10, RandomStringGenerator.Mode.ALPHANUMERIC);
+        resetPassword(newPassword, email);
+        emailController.generateEmailForRetrievePassword(email, newPassword);
     }
 
 }

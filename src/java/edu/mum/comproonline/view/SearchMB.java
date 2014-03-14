@@ -7,8 +7,11 @@ package edu.mum.comproonline.view;
 
 import edu.mum.comproonline.model.AppEvaluationStatusEnum;
 import edu.mum.comproonline.model.AppSubmitStatusEnum;
+import edu.mum.comproonline.model.ApplicationTbl;
 import edu.mum.comproonline.model.LoginDAO;
 import edu.mum.comproonline.model.SearchDAO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -29,6 +32,15 @@ public class SearchMB {
     private int submitStatus;
     private int evaluationStatus;
 
+    private List<ApplicationTbl> applicantionList;
+
+    public List<ApplicationTbl> getApplicantionList() {
+        return applicantionList;
+    }
+
+    public void setApplicantionList(List<ApplicationTbl> applicantionList) {
+        this.applicantionList = applicantionList;
+    }
     /**
      * Creates a new instance of SearchMB
      */
@@ -38,6 +50,8 @@ public class SearchMB {
         country = "";
         submitStatus = AppSubmitStatusEnum.SUBMITTED.ordinal();
         evaluationStatus = AppEvaluationStatusEnum.UNDECIDED.ordinal();
+        
+        applicantionList = new ArrayList<>();
     }
 
     public String getCountry() {
@@ -73,6 +87,6 @@ public class SearchMB {
     }
 
     public void search() {
-        searchDAO.searchApplication(this);
+        applicantionList = searchDAO.searchApplication(this);
     }
 }

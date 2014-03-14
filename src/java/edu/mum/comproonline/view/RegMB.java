@@ -5,6 +5,7 @@
  */
 package edu.mum.comproonline.view;
 
+import edu.mum.comproonline.control.EmailControlBean;
 import edu.mum.comproonline.control.RegistrationControlBean;
 import edu.mum.comproonline.model.UserEnum;
 import java.util.Date;
@@ -28,6 +29,8 @@ public class RegMB {
 
     @EJB
     private RegistrationControlBean myRegContBean;
+    @EJB
+    private EmailControlBean emailController;
 
     private String firstName;
     private String middleName;
@@ -150,7 +153,7 @@ public class RegMB {
             context.addMessage("password", message);
             return null;
         }
-        if (myRegContBean.emailExists(this)) {
+        if (myRegContBean.emailExists(this.getEmail())) {
             FacesContext context = FacesContext.getCurrentInstance();
             FacesMessage message = new FacesMessage("Email is already registered!");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
@@ -179,7 +182,8 @@ public class RegMB {
             context.addMessage("userEmail", message);
             return null;
         }
-        myRegContBean.resetPassword(this,session.getAttribute("susername").toString());
+        myRegContBean.resetPassword(this.getNewPassword(), session.getAttribute("susername").toString());
+        emailController.generateEmailForResetPassword(session.getAttribute("susername").toString());
         return "/pages/applicant/resetPasswordConfirmation.xhtml";
     }
 

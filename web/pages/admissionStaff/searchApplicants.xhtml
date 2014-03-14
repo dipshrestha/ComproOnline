@@ -4,12 +4,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="../../resources/templates/admissionStaffTemplate.xhtml">
 
         <ui:define name="body">
-            
+
             <h:form>
                 <p:messages id="messages" />
                 <p:panel id="panel" header="Search Applications">
@@ -26,7 +27,7 @@
                             <f:selectItem itemLabel="Bangladesh" itemValue="Bangladesh" />
                             <f:selectItem itemLabel="Ethopia" itemValue="Ethopia" />
                         </h:selectOneMenu>
-                      
+
                         <h:outputText value="Submit Status: " />
                         <h:selectOneRadio id="submitStatus" value="#{searchMB.submitStatus}">                            
                             <f:selectItem itemLabel="UnSubmitted" itemValue="0" />
@@ -45,6 +46,19 @@
                     </h:panelGrid>
                     <p:commandButton value="Submit" update="panel" style="margin-right:20px;" action="#{searchMB.search()}"/>
                 </p:panel>
+
+                <table>
+                    <tr>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Country
+                        </th>
+                    </tr>
+
+
+                </table>
             </h:form>
 
         </ui:define>

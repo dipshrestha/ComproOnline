@@ -31,31 +31,33 @@ public class SearchDAO extends AbstractFacade<ApplicationTbl> {
         return em;
     }
 
+    /**
+     * Get list of all the applications that match search criteria.
+     * @param searchMB search criteria
+     * @return list of applicants
+     */
     public List<ApplicationTbl> searchApplication(SearchMB searchMB) {
         
         // TODO:
-        String queryString = "select a from ApplicationTbl a where 1=1";
+        String queryString = "SELECT a FROM ApplicationTbl a WHERE 1=1";
+                  
+        if(!searchMB.getEmail().trim().isEmpty()) {
+            queryString += String.format(" AND a.personaldataTbl.pDataEmail = '%s' ", searchMB.getEmail());
+        }
+        if(!searchMB.getCountry().trim().isEmpty()) {
+            queryString += String.format(" AND a.personaldataTbl.pDataCountry = '%s' ", searchMB.getCountry());
+        }
+        
+        if(searchMB.getEvaluationStatus() < AppEvaluationStatusEnum.values().length) {
+            
+        }
+        
+        if(searchMB.getSubmitStatus() < AppSubmitStatusEnum.values().length) {
+            queryString += String.format(" AND a.appStatus = %d ", searchMB.getSubmitStatus());
+        }
+        
         Query query = em.createQuery(queryString);
-        Object result = query.getSingleResult();
-        
-        
-        if(!searchMB.getEmail().isEmpty()) {
-            queryString += " AND " + "x";
-        }
-        if(!searchMB.getCountry().isEmpty()) {
-            queryString += " AND ";
-        }
-        if(searchMB.getEvaluationStatus() >= AppEvaluationStatusEnum.values().length) {
-            
-        }else {
-            
-        }
-        
-        if(searchMB.getSubmitStatus() >= AppSubmitStatusEnum.values().length) {
-            
-        }else {
-            
-        }
-        return null;
+        List<ApplicationTbl> result = query.getResultList();
+        return result;
     }
 }
