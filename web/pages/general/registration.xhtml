@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../../resources/templates/applicantTemplate.xhtml">
+        <ui:define name="top">
+            <h2>Applicant Registration Form</h2>
+        </ui:define>
+        <ui:define name="body">
+
+            <h:form>
+                <p:messages/>
+                <p:panel header="Please Enter Your Registration Information.">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel for="firstName" value="First Name" styleClass="requiredLbl"/>
+                        <h:inputText  id="firstName" value="#{regMB.firstName}" required="true"/>  
+
+                        <h:outputLabel for="middleName" value="Middle Name" styleClass="requiredLbl"/>
+                        <h:inputText  id ="middleName" value="#{regMB.middleName}" required="true"/>
+
+                        <h:outputLabel for="lastName" value="Last Name" styleClass="requiredLbl"/>
+                        <h:inputText id="lastName" label="Last Name" value="#{regMB.lastName}" required="true"/>
+
+                        <h:outputLabel for="userEmail" value="Email" styleClass="requiredLbl"/>
+                        <h:inputText id="userEmail" label="User Email" value="#{regMB.email}" required="true"/>                        
+
+                        <h:outputLabel for="password" value="password" styleClass="requiredLbl"/>
+                        <h:inputSecret id="password" label="password" value="#{regMB.password}" required="true">
+                            <f:validateLength minimum="8"/>                               
+                        </h:inputSecret>
+                        <h:outputLabel for="confirmPassword" value="Confirm Password" styleClass="requiredLbl"/>
+                        <h:inputSecret id="confirmPassword" label="confirmPassword" value="#{regMB.password_2}" required="true">
+                            <f:validateLength minimum="8"/>       
+
+                        </h:inputSecret>
+                        <h:panelGroup/>
+                        <p:commandButton 
+                            value="Submit" 
+                            action ="#{regMB.saveUserInfo}" 
+                            ajax="false"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+

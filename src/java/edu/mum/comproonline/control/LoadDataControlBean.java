@@ -98,7 +98,7 @@ public class LoadDataControlBean {
         //         Adding the Professiona Data
         // ------------------------------------------ //
         ProfessionalexpTbl professionalexp = new ProfessionalexpTbl();
-        professionalexp.setPExID(100);
+        //professionalexp.setPExID(100);
         professionalexp.setPExCity("kathmandu");
         professionalexp.setPExCompanyName("BSoftNepal");
         professionalexp.setPExCountry("Nepal");
@@ -130,7 +130,7 @@ public class LoadDataControlBean {
         personaldata.setPDataGender("Male");
         personaldata.setPDataHomeCountry("Nepal");
         personaldata.setPDataHomePhone("6414510356");
-        personaldata.setPDataID(100);
+        //personaldata.setPDataID(100);
         personaldata.setPDataLastName("Shrestha");
         personaldata.setPDataMiddleName("Lal");
         personaldata.setPDataMobilePhone("6414510000");
@@ -147,7 +147,7 @@ public class LoadDataControlBean {
         GreTbl gre = new GreTbl();
         gre.setGAnalyticalPercentile(10);
         gre.setGAnalyticalScore(10);
-        gre.setGID(100);
+        //gre.setGID(100);
         gre.setGQuantitativePercentile(100);
         gre.setGQuantitativeScore(100);
         gre.setGVerbalPercentile(100);
@@ -155,7 +155,7 @@ public class LoadDataControlBean {
         em.persist(gre);
         
         EnglishproTbl englishPro = new EnglishproTbl();
-        englishPro.setEnID(100);
+        //englishPro.setEnID(100);
         englishPro.setEnListeningAbility(1);
         englishPro.setEnReadingWritingAbility(1);
         englishPro.setEnSpeakingAbility(2);
@@ -185,7 +185,7 @@ public class LoadDataControlBean {
         institute1.setInstituteEndDate("01/01/2014");
         institute1.setInstituteFinalGPA("4");
         institute1.setInstituteGradingScale("4");
-        institute1.setInstituteID(100);
+        //institute1.setInstituteID(100);
         institute1.setInstituteName("Tribhuwan University");
         institute1.setInstituteStartDate("01/01/2013");
         institute1.setInstituteSubject("Mathematics");
@@ -198,7 +198,7 @@ public class LoadDataControlBean {
         course.setCourseInsID(institute1);
         course.setCourseTitle("Algorithm");
         course.setCourseType("MyType");
-        em.persist(course);       
+        em.persist(course);              
         
         
         InstituteTbl institute2 = new InstituteTbl();
@@ -211,7 +211,7 @@ public class LoadDataControlBean {
         institute2.setInstituteEndDate("01/01/2014");
         institute2.setInstituteFinalGPA("4");
         institute2.setInstituteGradingScale("4");
-        institute2.setInstituteID(100);
+        //institute2.setInstituteID(100);
         institute2.setInstituteName("WAKHOK University");
         institute2.setInstituteStartDate("01/01/2013");
         institute2.setInstituteSubject("Research");
@@ -234,8 +234,14 @@ public class LoadDataControlBean {
         em.persist(application);
         
         // TEST
-        //Query q = em.createQuery("SELECT a FROM ApplicationTbl a WHERE a.appID=100", ApplicationTbl.class);
-        //ApplicationTbl result = (ApplicationTbl)q.getSingleResult();
+         //TypedQuery q1 = em.createNamedQuery("ApplicationTbl.findByAppID", ApplicationTbl.class);
+         //q1 = q1.setParameter("appID", 100);
+    
+        //Query q = em.createQuery("SELECT a FROM ApplicationTbl a WHERE a.appID=10", ApplicationTbl.class);
+        Query q = em.createQuery("SELECT a FROM ApplicationTbl a WHERE a.appUserID.userEmail='dip@hotmail.com'", ApplicationTbl.class);
+        ApplicationTbl result = (ApplicationTbl)q.getSingleResult();
+        EducationaldataTbl educationaldataObj = result.getEducationaldataTbl();
+        long id = educationaldataObj.getEdID();
         
     }
 
