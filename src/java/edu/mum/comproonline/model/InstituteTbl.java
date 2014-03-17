@@ -108,9 +108,9 @@ public class InstituteTbl implements Serializable {
     private String instituteDegreeStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseInsID")
     private Collection<CoursesTbl> coursesTblCollection;      
-    @JoinColumn(name = "instituteEdID", referencedColumnName = "edID")
-    @ManyToOne(optional = false)
-    private EducationaldataTbl instituteEdID;
+//    @JoinColumn(name = "instituteEdID", referencedColumnName = "edID")
+//    @ManyToOne(optional = false)
+//    private EducationaldataTbl instituteEdID;
 
     public InstituteTbl() {
     }
@@ -237,14 +237,14 @@ public class InstituteTbl implements Serializable {
     public void setCoursesTblCollection(Collection<CoursesTbl> coursesTblCollection) {
         this.coursesTblCollection = coursesTblCollection;
     }
-
-    public EducationaldataTbl getInstituteEdID() {
-        return instituteEdID;
-    }
-
-    public void setInstituteEdID(EducationaldataTbl instituteEdID) {
-        this.instituteEdID = instituteEdID;
-    }
+//
+//    public EducationaldataTbl getInstituteEdID() {
+//        return instituteEdID;
+//    }
+//
+//    public void setInstituteEdID(EducationaldataTbl instituteEdID) {
+//        this.instituteEdID = instituteEdID;
+//    }
 
     @Override
     public int hashCode() {

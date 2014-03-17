@@ -34,14 +34,17 @@ import javax.persistence.Table;
 public class EducationaldataTbl implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Basic(optional = false)
     @Column(name = "edID")
     private Integer edID;
     
     //@OneToMany(cascade = CascadeType.ALL)    
     //@JoinColumn(name = "edInstituteID", referencedColumnName = "instituteID") 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "instituteEdID")
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "instituteEdID")    
+    @OneToMany(cascade = CascadeType.ALL)    
+    @JoinColumn(name = "edInstituteID", referencedColumnName = "edID") 
     private Collection<InstituteTbl> instituteTblCollection;
     
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "instituteEdID")

@@ -7,6 +7,7 @@ package edu.mum.comproonline.control;
 
 import edu.mum.comproonline.model.AppSubmitStatusEnum;
 import edu.mum.comproonline.model.ApplicationTbl;
+import edu.mum.comproonline.model.CoursesTbl;
 import edu.mum.comproonline.model.EducationaldataTbl;
 import edu.mum.comproonline.model.EnglishproTbl;
 import edu.mum.comproonline.model.GreTbl;
@@ -166,34 +167,56 @@ public class LoadDataControlBean {
         
         // ------------------------------------------ //
         //         Adding Education data
-        // ------------------------------------------ //
+        // ------------------------------------------ // 
         EducationaldataTbl educationaldata = new EducationaldataTbl();
-        educationaldata.setEdID(100);
-        //educationaldata.setInstituteTblCollection(null);
-//        List<InstituteTbl> instituteList = new ArrayList<>();
-//        instituteList.add(institute1);
-//        educationaldata.setInstituteTblCollection(instituteList);
-        //em.persist(educationaldata);
+        //educationaldata.setEdID(100);
+        //List<InstituteTbl> instituteList = new ArrayList<>();
+        //instituteList.add(institute1);
+        //educationaldata.setInstituteTblCollection( instituteList);
+        em.persist(educationaldata);
         
         InstituteTbl institute1 = new InstituteTbl();
-        institute1.setCoursesTblCollection(null);
+        //institute1.setCoursesTblCollection(null);
         institute1.setInstituteArea("kathmandu");
         institute1.setInstituteCity("kathmandu");
         institute1.setInstituteCounty("Nepal");
         institute1.setInstituteDegree("Bachelor");
         institute1.setInstituteDegreeStatus("Completed");
         institute1.setInstituteEndDate("01/01/2014");
-        institute1.setInstituteEdID(educationaldata);
         institute1.setInstituteFinalGPA("4");
         institute1.setInstituteGradingScale("4");
         institute1.setInstituteID(100);
         institute1.setInstituteName("Tribhuwan University");
         institute1.setInstituteStartDate("01/01/2013");
         institute1.setInstituteSubject("Mathematics");
-        institute1.setInstituteEdID(educationaldata);
-        //em.persist(institute1);       
-
+        institute1.setInstituteID(educationaldata.getEdID());
+        em.persist(institute1);
         
+        CoursesTbl course = new CoursesTbl();
+        course.setCourseGrade("4.0");
+        course.setCourseID(100);
+        course.setCourseInsID(institute1);
+        course.setCourseTitle("Algorithm");
+        course.setCourseType("MyType");
+        em.persist(course);       
+        
+        
+        InstituteTbl institute2 = new InstituteTbl();
+        institute2.setCoursesTblCollection(null);
+        institute2.setInstituteArea("Hokkaido");
+        institute2.setInstituteCity("Sapporo");
+        institute2.setInstituteCounty("Japan");
+        institute2.setInstituteDegree("Research");
+        institute2.setInstituteDegreeStatus("Completed");
+        institute2.setInstituteEndDate("01/01/2014");
+        institute2.setInstituteFinalGPA("4");
+        institute2.setInstituteGradingScale("4");
+        institute2.setInstituteID(100);
+        institute2.setInstituteName("WAKHOK University");
+        institute2.setInstituteStartDate("01/01/2013");
+        institute2.setInstituteSubject("Research");
+        institute2.setInstituteID(educationaldata.getEdID());
+        em.persist(institute2);
         
         // ------------------------------------------ //
         //         Saving the application
@@ -203,8 +226,11 @@ public class LoadDataControlBean {
         application.setAppID(100);
         application.setAppUserID(applicant);
         
+        application.setEnglishproTbl(englishPro);
         application.setProfessionalexpTbl(professionalexp);        
         application.setPersonaldataTbl(personaldata);
+        application.setEducationaldataTbl(educationaldata);
+        
         em.persist(application);
         
         // TEST
