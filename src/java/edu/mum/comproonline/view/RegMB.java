@@ -145,29 +145,35 @@ public class RegMB {
         this.newPassword = newPassword;
     }
 
-    public String saveRegInfo() throws Exception {
+    public String saveUserInfo() throws Exception {
+        if(saveRegInfo()) {
+            emailController.generateEmailForNewAppRegistration(this.getEmail());
+        }
+        return "/pages/applicant/registrationConfirmation.xhtml";
+    }
+
+    public boolean saveRegInfo() throws Exception {
         if (!(this.getPassword().equals(this.getPassword_2()))) {
             FacesContext context = FacesContext.getCurrentInstance();
             FacesMessage message = new FacesMessage("passwords donot match!");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             context.addMessage("password", message);
-            return null;
+            return false;
         }
         if (myRegContBean.emailExists(this.getEmail())) {
             FacesContext context = FacesContext.getCurrentInstance();
             FacesMessage message = new FacesMessage("Email is already registered!");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             context.addMessage("userEmail", message);
-            return null;
+            return false;
         }
         myRegContBean.saveRegInfo(this);
+        return true;
 
         //return "index.xhtml";
-        return "/pages/applicant/registrationConfirmation.xhtml";
     }
 
     public String resetPassword() throws Exception {
-
         if (!(this.getNewPassword().equals(this.getPassword_2()))) {
             FacesContext context = FacesContext.getCurrentInstance();
             FacesMessage message = new FacesMessage("passwords donot match!");
@@ -187,4 +193,19 @@ public class RegMB {
         return "/pages/applicant/resetPasswordConfirmation.xhtml";
     }
 
+    /**
+     * if the logged in user is admin then this method will create admission
+     * staff account and send email to the admission staff
+     *
+     * @throws Exception
+     */
+    public void saveAdmissionStaffInfo() throws Exception {
+        if(saveRegInfo()){
+            emailController.generateEmailForCreateNewStaff(this.getEmail(), this.getPassword());
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage("An Admission Staff Account has been created successfully!");
+            message.setSeverity(FacesMessage.SEVERITY_INFO);
+            context.addMessage("password", message);
+        }
+    }
 }

@@ -9,6 +9,7 @@ import edu.mum.comproonline.model.LoginDAO;
 import edu.mum.comproonline.model.UserTbl;
 import edu.mum.comproonline.util.HashServices;
 import edu.mum.comproonline.view.LoginMB;
+import java.util.Calendar;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -39,6 +40,10 @@ public class LoginControlBean {
         }
 
         if (userName.equals(userFound.getUserEmail()) && password.equals(userFound.getUserPassword())) {
+            
+            Calendar cal = Calendar.getInstance();
+            userFound.setUserLastLoginDate(cal.getTime());
+            loginEntityDAO.setLoginTime(userFound);
 
             return userFound.getUserRole();
         } else {

@@ -2,17 +2,155 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-          xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    
-       <ui:composition template="../../resources/templates/admissionStaffTemplate.xhtml">
-    
+
+    <ui:composition template="../../resources/templates/applicantTemplate.xhtml">
+
         <ui:define name="body">
-            
-           
+            <h:form>
+                <p:panel>
+                    <f:facet name="header"><h:outputText value="Md. Zahedul A Khan, #{reviewMB.submittedStatus} with score [#{evaluationControlBean.totalScore}/300]"/></f:facet>
+                    <p:fieldset legend="Professional Experience (#{evaluationControlBean.professionalScore}/100)">
+                        <p:dataTable id="Professional">
+
+                            <p:column headerText="Company Name">
+                                <h:outputText value="AIUB" />
+                            </p:column>
+                            <p:column headerText="Country">
+                                <h:outputText value="Bangladesh" />
+                            </p:column>
+                            <p:column headerText="Position">
+                                <h:outputText value="Sr. Programmer" />
+                            </p:column>
+
+                            <p:column headerText="From (#{evaluationControlBean.employmentDurationScore}/50)">
+                                <h:outputText value="01/01/2011" />
+                            </p:column>
+
+                            <p:column headerText="To">
+                                <h:outputText value="01/01/2012" />
+                            </p:column>
+
+                            <p:column headerText="Employment Type (#{evaluationControlBean.employmentTypeScore}/50)">
+                                <h:outputText value="FullTime" />
+                            </p:column>
+
+                            <p:column headerText="Working Area">
+                                <h:outputText value="Programmer" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+
+                    <p:fieldset legend="Educational Record (#{evaluationControlBean.educationalScore}/100)">
+                        <p:dataTable>
+                            <p:column headerText="Name">
+                                <h:outputText value="AIUB" />
+                            </p:column>
+
+                            <p:column headerText="Degree (#{evaluationControlBean.degreeScore}/35)">
+                                <h:outputText value="BSC in Computer Science" />
+                            </p:column>
+
+                            <p:column headerText="Subject (#{evaluationControlBean.speakingScore}/30)">
+                                <h:outputText value="Introduction to Programming" />
+                            </p:column>
+
+                            <p:column headerText="From">
+                                <h:outputText value="01/01/2011" />
+                            </p:column>
+
+                            <p:column headerText="To">
+                                <h:outputText value="05/01/2011" />
+                            </p:column>
+
+                            <p:column headerText="Scale">
+                                <h:outputText value="4" />
+                            </p:column>
+
+                            <p:column headerText="GPA (#{evaluationControlBean.gradeScore}/35)">
+                                <h:outputText value="3.8" />
+                            </p:column>
+
+                            <p:column headerText="Programming">
+                                <h:outputText value="YES" />
+                            </p:column>
+
+                            <p:column headerText="Data Structure">
+                                <h:outputText value="NO" />
+                            </p:column>
+
+                            <p:column headerText="Algorithm">
+                                <h:outputText value="NO" />
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </p:fieldset>
+                    <p:fieldset legend="English Proficiency (#{evaluationControlBean.englishScore}/100)">
+                        <h:outputLabel  style="font-size: medium;color: black;">ABILITY (#{evaluationControlBean.englishAbilityScore}/30)     </h:outputLabel>
+                        <h:outputText  style="font-size: 15px;color: #008cd9" value="ReadWrite (#{evaluationControlBean.readWriteScore}/10) Speak (#{evaluationControlBean.speakingScore}/10) Listening (#{evaluationControlBean.listeningScore}/10)"/>
+
+                        <h:panelGrid columns="5"  style="font-size: 15px;color: #008cd9">
+                            <h:outputLabel  style="font-size: medium;color: black;">TOEFL (#{evaluationControlBean.toeflScore}/30)   </h:outputLabel>
+
+                            <h:outputLabel>Year Taken:</h:outputLabel>
+                            <h:outputText value="01/01/2011"/>
+
+                            <h:outputLabel>Score:</h:outputLabel>
+                            <h:outputText value="85"/>
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="10"  style="font-size: 15px;color: #008cd9;">
+                            <h:outputLabel  style="font-size: medium;color: black;">GRE (#{evaluationControlBean.greScore}/20)    </h:outputLabel>
+                            <h:outputLabel>Year:</h:outputLabel>
+                            <h:outputText value="01/01/2011"/>
+
+                            <h:outputLabel> Verbal: </h:outputLabel>
+                            <h:outputText value="23,85"/>
+
+                            <h:outputLabel> Quantitative Score:</h:outputLabel>
+                            <h:outputText value="85, 45"/>
+
+                            <h:outputLabel> Analytical Score:</h:outputLabel> 
+                            <h:outputText value="85, 45"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="13"  style="font-size: 15px;color: #008cd9">
+                            <h:outputLabel  style="font-size: medium;color: black;">IELTS (#{evaluationControlBean.ieltsScore}/20)   </h:outputLabel>
+
+                            <h:outputLabel >Year Taken:</h:outputLabel>
+                            <h:outputText value="01/01/2011"/>
+
+                            <h:outputLabel >Overall Score:</h:outputLabel>
+                            <h:outputText value="6.5"/>
+
+                            <h:outputLabel> Listening:</h:outputLabel>
+                            <h:outputText value="6"/>
+
+                            <h:outputLabel> Reading:</h:outputLabel>
+                            <h:outputText value="7"/>
+
+                            <h:outputLabel> Writing:</h:outputLabel>
+                            <h:outputText value="5"/>
+
+                            <h:outputLabel> Speaking:</h:outputLabel>
+                            <h:outputText value="6"/>
+
+                        </h:panelGrid>
+
+                    </p:fieldset>
+
+
+                </p:panel>
+                <br/>
+                    <p:button onclick="javascript: return confirm('REJECT this Application?');" value="Reject" style="color: red; float: right;margin-left: 10px"/>
+                    <p:button onclick="javascript: return confirm('ACCEPT this Application?');" value="Accept" style="color: green; float:right"/>
+            </h:form>
+
         </ui:define>
-    
-       </ui:composition>
+
+    </ui:composition>
 </html>
 

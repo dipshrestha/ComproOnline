@@ -61,13 +61,6 @@ public class RegistrationControlBean {
         newAppl.setUserCreationDate(cal.getTime());
 
         myApplicantDAO.create(newAppl);
-
-        //System.out.println(myHashService.getPassWord());
-        emailForemail = regMB.getEmail();
-        emailForpassword = regMB.getPassword().toString();
-        role = regMB.getRoles();
-        generateEmail();
-
     }
 
     /**
@@ -122,17 +115,6 @@ public class RegistrationControlBean {
         oldUser.setUserPassword(myHashService.getMessageDigest());
         myApplicantDAO.edit(oldUser);
 
-    }
-
-    /**
-     * author Khan
-     */
-    public void generateEmail() {
-        if (role == UserEnum.STAFF.ordinal()) {
-            emailController.generateEmailForNewStaffRegistration(emailForemail, emailForpassword);
-        } else {
-            emailController.generateEmailForNewAppRegistration(emailForemail);
-        }
     }
 
     /**

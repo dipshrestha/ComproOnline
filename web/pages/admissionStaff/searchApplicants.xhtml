@@ -22,6 +22,7 @@
                         <h:outputLabel for="country" value="Country: " />
                         <h:selectOneMenu id="country" value="#{searchMB.country}">
                             <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItem itemLabel="USA" itemValue="USA" />
                             <f:selectItem itemLabel="Nepal" itemValue="Nepal" />
                             <f:selectItem itemLabel="Iran" itemValue="Iran" />
                             <f:selectItem itemLabel="Bangladesh" itemValue="Bangladesh" />
@@ -46,19 +47,37 @@
                     </h:panelGrid>
                     <p:commandButton value="Submit" update="panel" style="margin-right:20px;" action="#{searchMB.search()}"/>
                 </p:panel>
+                <br/><br/>
+                <p:dataTable var="applications" value="#{searchMB.applicantionList}">
+                    <f:facet name="header">
+                        Search Result
+                    </f:facet>
+                    <p:column headerText="ID">
+                        <h:link outcome="reviewForm.xhtml?id=#{applications.appID}" value="#{applications.appID}" style="color: #ea7d1b"/>
+                    </p:column>
+                    
+                    <p:column headerText="Name">
+                        <h:outputLabel value="#{applications.personaldataTbl.PDataFirstName} #{applications.personaldataTbl.PDataLastName}"/>
+                    </p:column>
 
-                <table>
-                    <tr>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Country
-                        </th>
-                    </tr>
+                    <p:column headerText="Email">
+                        <h:outputLabel value="#{applications.personaldataTbl.PDataEmail}"/>
+                    </p:column>
 
+                    <p:column headerText="Country">
+                        <h:outputLabel value="#{applications.personaldataTbl.PDataCountry}"/>
+                    </p:column>
 
-                </table>
+                    <p:column headerText="Submit Status">
+                        <h:outputLabel value="#{applications.appStatus eq 0 ? 'Unsubmitted' : 'Submitted'}"/>
+                    </p:column>
+
+                    <p:column headerText="Evaluation Status">
+                        TODO!!
+                    </p:column>
+
+                    <br/>
+                </p:dataTable>
             </h:form>
 
         </ui:define>

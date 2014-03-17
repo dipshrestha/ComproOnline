@@ -63,18 +63,18 @@ public class LoginMB {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 
-        if (result == UserEnum.ADMIN.ordinal()) {
+       if (result == UserEnum.ADMIN.ordinal()) {
             session.setAttribute("susername", this.username);
-            session.setAttribute("srole", "ADMIN");
+            session.setAttribute("srole", UserEnum.ADMIN);
             facesContext.getExternalContext().redirect("../Admin/adminHomePage.xhtml");
 
         } else if (result == UserEnum.APPLICANT.ordinal()) {
             session.setAttribute("susername", this.username);
-            session.setAttribute("srole", "APPLICANT");
+            session.setAttribute("srole", UserEnum.APPLICANT);
             facesContext.getExternalContext().redirect("../applicant/applicantHomaPage.xhtml");
         } else if (result == UserEnum.STAFF.ordinal()) {
             session.setAttribute("susername", this.username);
-            session.setAttribute("srole", "STAFF");
+            session.setAttribute("srole", UserEnum.STAFF);
             facesContext.getExternalContext().redirect("../admissionStaff/admissionStaffHomePage.xhtml");
         } else if (result == -1) {
             this.errormessage = "UserName or Password is incorrect try agaain !!!";
@@ -82,6 +82,11 @@ public class LoginMB {
 
         return "login.xhtml";
 
+    }
+    
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login.xhtml?faces-redirect=true";
     }
 
 }

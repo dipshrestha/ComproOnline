@@ -23,9 +23,6 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class EmailControlBean {
 
-//    private String strTo;
-    //private String strSubject;
-    //private String strMessage;
     final String username = "gpa.application@gmail.com";
     final String password = "gpa.application1";
 
@@ -75,7 +72,6 @@ public class EmailControlBean {
         String strSubject = "Confirmation Email for Application Submission";
         String strMessage = "Welcome to Compro Online System. " + "Your registration is confirmed.\n"
                 + "Do not reply this is system generated email.";
-
         sendEmail(strTo, strSubject, strMessage);
 
     }
@@ -114,7 +110,7 @@ public class EmailControlBean {
      * @param strTo
      * @param newPassword 
      */
-    public void generateEmailForRetrievePassword(String strTo,String newPassword) {
+    public void generateEmailForRetrievePassword(String strTo,String newPassword) throws Exception{
 
         String strSubject = "New password";
         String strMessage = "Since you requested new password we have sent you this email " 
@@ -139,9 +135,23 @@ public class EmailControlBean {
         sendEmail(strTo, strSubject, strMessage);
 
     }
+    /**
+     * author Abraham
+     * @param strTo
+     * @param password
+     * @throws Exception 
+     */
+    public void generateEmailForCreateNewStaff(String strTo,String password)throws Exception{         
+        String strSubject = "Account Created";
+        String strMessage = "CS Admin has created an Admission Staff Account for you " 
+                + "\nYour User id is "+strTo+"\n"
+                + "Your password is "+password+"\n"
+                + "Do not reply, this is system generated email.";
+        sendEmail(strTo, strSubject, strMessage);
+        
+    }
 
     public void sendEmail(String strTo, String strSubject, String strMessage) {
-
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");

@@ -8,7 +8,6 @@ package edu.mum.comproonline.view;
 import edu.mum.comproonline.model.AppEvaluationStatusEnum;
 import edu.mum.comproonline.model.AppSubmitStatusEnum;
 import edu.mum.comproonline.model.ApplicationTbl;
-import edu.mum.comproonline.model.LoginDAO;
 import edu.mum.comproonline.model.SearchDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +51,12 @@ public class SearchMB {
         evaluationStatus = AppEvaluationStatusEnum.UNDECIDED.ordinal();
         
         applicantionList = new ArrayList<>();
+
+        // DELETE
+//        FacesContext facesContext = FacesContext.getCurrentInstance();
+//        String s2 = facesContext.getExternalContext().getRealPath("/resources/files/myApp.properties");
+//        String realPath = s2;
+//        new MyPropertiesReader().doSomeOperation(realPath);
     }
 
     public String getCountry() {
@@ -86,7 +91,8 @@ public class SearchMB {
         this.evaluationStatus = evaluationStatus;
     }
 
-    public void search() {
+    public String search() {
         applicantionList = searchDAO.searchApplication(this);
+        return "/pages/admissionStaff/searchApplicants.xhtml";
     }
 }
