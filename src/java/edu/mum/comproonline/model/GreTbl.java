@@ -7,6 +7,7 @@
 package edu.mum.comproonline.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -38,36 +40,31 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "GreTbl.findByGAnalyticalPercentile", query = "SELECT g FROM GreTbl g WHERE g.gAnalyticalPercentile = :gAnalyticalPercentile"),
     @NamedQuery(name = "GreTbl.findByGYearTaken", query = "SELECT g FROM GreTbl g WHERE g.gYearTaken = :gYearTaken")})
 public class GreTbl implements Serializable {
-    private static final long serialVersionUID = 1L;
+    @Column(name = "gAnalyticalPercentile")
+    private Integer gAnalyticalPercentile;
+    @Column(name = "gAnalyticalScore")
+    private Integer gAnalyticalScore;
+    @Column(name = "gQuantitativePercentile")
+    //@NotNull
+    private Integer gQuantitativePercentile;
+    @Column(name = "gQuantitativeScore")
+    //@NotNull
+    private Integer gQuantitativeScore;
+    @Column(name = "gVerbalPercentile")
+    //@NotNull
+    private Integer gVerbalPercentile;
+    @Column(name = "gVerbalScore")
+    //@NotNull
+    private Integer gVerbalScore;
+  /*  @OneToMany(mappedBy = "appGID")
+    //@NotNull
+    private Collection<EnglishproTbl> englishproTblCollection;
+    private static final long serialVersionUID = 1L;*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "gID")
     private Integer gID;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "gVerbalScore")
-    private int gVerbalScore;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "gVerbalPercentile")
-    private int gVerbalPercentile;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "gQuantitativeScore")
-    private int gQuantitativeScore;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "gQuantitativePercentile")
-    private int gQuantitativePercentile;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "gAnalyticalScore")
-    private int gAnalyticalScore;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "gAnalyticalPercentile")
-    private int gAnalyticalPercentile;
     @Basic(optional = false)
     //@NotNull
     //@Size(min = 1, max = 10)
@@ -101,54 +98,6 @@ public class GreTbl implements Serializable {
 
     public void setGID(Integer gID) {
         this.gID = gID;
-    }
-
-    public int getGVerbalScore() {
-        return gVerbalScore;
-    }
-
-    public void setGVerbalScore(int gVerbalScore) {
-        this.gVerbalScore = gVerbalScore;
-    }
-
-    public int getGVerbalPercentile() {
-        return gVerbalPercentile;
-    }
-
-    public void setGVerbalPercentile(int gVerbalPercentile) {
-        this.gVerbalPercentile = gVerbalPercentile;
-    }
-
-    public int getGQuantitativeScore() {
-        return gQuantitativeScore;
-    }
-
-    public void setGQuantitativeScore(int gQuantitativeScore) {
-        this.gQuantitativeScore = gQuantitativeScore;
-    }
-
-    public int getGQuantitativePercentile() {
-        return gQuantitativePercentile;
-    }
-
-    public void setGQuantitativePercentile(int gQuantitativePercentile) {
-        this.gQuantitativePercentile = gQuantitativePercentile;
-    }
-
-    public int getGAnalyticalScore() {
-        return gAnalyticalScore;
-    }
-
-    public void setGAnalyticalScore(int gAnalyticalScore) {
-        this.gAnalyticalScore = gAnalyticalScore;
-    }
-
-    public int getGAnalyticalPercentile() {
-        return gAnalyticalPercentile;
-    }
-
-    public void setGAnalyticalPercentile(int gAnalyticalPercentile) {
-        this.gAnalyticalPercentile = gAnalyticalPercentile;
     }
 
     public String getGYearTaken() {
@@ -191,5 +140,61 @@ public class GreTbl implements Serializable {
     public String toString() {
         return "edu.mum.comproonline.model.GreTbl[ gID=" + gID + " ]";
     }
+
+    public Integer getGAnalyticalPercentile() {
+        return gAnalyticalPercentile;
+    }
+
+    public void setGAnalyticalPercentile(Integer gAnalyticalPercentile) {
+        this.gAnalyticalPercentile = gAnalyticalPercentile;
+    }
+
+    public Integer getGAnalyticalScore() {
+        return gAnalyticalScore;
+    }
+
+    public void setGAnalyticalScore(Integer gAnalyticalScore) {
+        this.gAnalyticalScore = gAnalyticalScore;
+    }
+
+    public Integer getGQuantitativePercentile() {
+        return gQuantitativePercentile;
+    }
+
+    public void setGQuantitativePercentile(Integer gQuantitativePercentile) {
+        this.gQuantitativePercentile = gQuantitativePercentile;
+    }
+
+    public Integer getGQuantitativeScore() {
+        return gQuantitativeScore;
+    }
+
+    public void setGQuantitativeScore(Integer gQuantitativeScore) {
+        this.gQuantitativeScore = gQuantitativeScore;
+    }
+
+    public Integer getGVerbalPercentile() {
+        return gVerbalPercentile;
+    }
+
+    public void setGVerbalPercentile(Integer gVerbalPercentile) {
+        this.gVerbalPercentile = gVerbalPercentile;
+    }
+
+    public Integer getGVerbalScore() {
+        return gVerbalScore;
+    }
+
+    public void setGVerbalScore(Integer gVerbalScore) {
+        this.gVerbalScore = gVerbalScore;
+    }
+
+   /* public Collection<EnglishproTbl> getEnglishproTblCollection() {
+        return englishproTblCollection;
+    }
+
+    public void setEnglishproTblCollection(Collection<EnglishproTbl> englishproTblCollection) {
+        this.englishproTblCollection = englishproTblCollection;
+    }*/
     
 }

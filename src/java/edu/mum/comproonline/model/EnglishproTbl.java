@@ -37,24 +37,22 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "EnglishproTbl.findByEnSpeakingAbility", query = "SELECT e FROM EnglishproTbl e WHERE e.enSpeakingAbility = :enSpeakingAbility"),
     @NamedQuery(name = "EnglishproTbl.findByEnListeningAbility", query = "SELECT e FROM EnglishproTbl e WHERE e.enListeningAbility = :enListeningAbility")})
 public class EnglishproTbl implements Serializable {
-    private static final long serialVersionUID = 1L;
+    @Column(name = "enListeningAbility")
+    private Integer enListeningAbility;
+    @Column(name = "enReadingWritingAbility")
+    private Integer enReadingWritingAbility;
+    @Column(name = "enSpeakingAbility")
+    private Integer enSpeakingAbility;
+    @Column(name = "enAppID")
+    private Integer enAppID;
+   /* @OneToMany(mappedBy = "appEnID")
+    private Collection<ApplicationTbl> applicationTblCollection;
+    private static final long serialVersionUID = 1L;*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "enID")
     private Integer enID;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "enReadingWritingAbility")
-    private int enReadingWritingAbility;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "enSpeakingAbility")
-    private int enSpeakingAbility;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "enListeningAbility")
-    private int enListeningAbility;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "enTID", referencedColumnName = "tId")
@@ -102,30 +100,6 @@ public class EnglishproTbl implements Serializable {
 
     public void setEnID(Integer enID) {
         this.enID = enID;
-    }
-
-    public int getEnReadingWritingAbility() {
-        return enReadingWritingAbility;
-    }
-
-    public void setEnReadingWritingAbility(int enReadingWritingAbility) {
-        this.enReadingWritingAbility = enReadingWritingAbility;
-    }
-
-    public int getEnSpeakingAbility() {
-        return enSpeakingAbility;
-    }
-
-    public void setEnSpeakingAbility(int enSpeakingAbility) {
-        this.enSpeakingAbility = enSpeakingAbility;
-    }
-
-    public int getEnListeningAbility() {
-        return enListeningAbility;
-    }
-
-    public void setEnListeningAbility(int enListeningAbility) {
-        this.enListeningAbility = enListeningAbility;
     }
 
     public ToeflTbl getToeflTbl() {
@@ -184,5 +158,45 @@ public class EnglishproTbl implements Serializable {
     public String toString() {
         return "edu.mum.comproonline.model.EnglishproTbl[ enID=" + enID + " ]";
     }
+
+    public Integer getEnListeningAbility() {
+        return enListeningAbility;
+    }
+
+    public void setEnListeningAbility(Integer enListeningAbility) {
+        this.enListeningAbility = enListeningAbility;
+    }
+
+    public Integer getEnReadingWritingAbility() {
+        return enReadingWritingAbility;
+    }
+
+    public void setEnReadingWritingAbility(Integer enReadingWritingAbility) {
+        this.enReadingWritingAbility = enReadingWritingAbility;
+    }
+
+    public Integer getEnSpeakingAbility() {
+        return enSpeakingAbility;
+    }
+
+    public void setEnSpeakingAbility(Integer enSpeakingAbility) {
+        this.enSpeakingAbility = enSpeakingAbility;
+    }
+
+    public Integer getEnAppID() {
+        return enAppID;
+    }
+
+    public void setEnAppID(Integer enAppID) {
+        this.enAppID = enAppID;
+    }
+
+   /* public Collection<ApplicationTbl> getApplicationTblCollection() {
+        return applicationTblCollection;
+    }
+
+    public void setApplicationTblCollection(Collection<ApplicationTbl> applicationTblCollection) {
+        this.applicationTblCollection = applicationTblCollection;
+    }*/
     
 }

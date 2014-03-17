@@ -43,10 +43,13 @@ public class PersonalDataDAO extends AbstractFacade<PersonaldataTbl>{
        return (PersonaldataTbl)result;
      
    }
-   
-   public void savePersonalData()
-   {
-       
-   }
+    public void createPersonalData(PersonaldataTbl p)
+    {
+        em.persist(p);
+    }
+    public void updatePersonalData(PersonaldataTbl p)
+    {
+        em.merge(p);
+    }
    
 }

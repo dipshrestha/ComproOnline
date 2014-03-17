@@ -222,7 +222,7 @@ public class LoadDataControlBean {
         //         Saving the application
         // ------------------------------------------ //
         ApplicationTbl application = new ApplicationTbl();
-        application.setAppStatus(AppSubmitStatusEnum.SUBMITTED.ordinal());
+        application.setAppSubmitStatus(AppSubmitStatusEnum.SUBMITTED.ordinal());
         application.setAppID(100);
         application.setAppUserID(applicant);
         

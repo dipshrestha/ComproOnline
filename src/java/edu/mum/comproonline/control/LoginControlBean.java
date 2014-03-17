@@ -19,7 +19,7 @@ import javax.ejb.Stateless;
  * @author User
  */
 @Stateless
-@LocalBean
+
 public class LoginControlBean {
 
     @EJB
@@ -33,7 +33,7 @@ public class LoginControlBean {
         userName = loginMB.getUsername();
         password = new HashServices(loginMB.getPassword()).getMessageDigest();
 
-        userFound = loginEntityDAO.findApplicantByEmailAddr(userName, password);
+        userFound = loginEntityDAO.findApplicantByEmailAddr(userName);
 
         if (userFound == null) {
             return -1;

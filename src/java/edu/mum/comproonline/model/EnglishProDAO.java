@@ -6,8 +6,6 @@
 
 package edu.mum.comproonline.model;
 
-import edu.mum.comproonline.model.AbstractFacade;
-import edu.mum.comproonline.model.EnglishproTbl;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.EntityManager;
@@ -19,19 +17,24 @@ import javax.persistence.Query;
  */
 @Stateless
 public class EnglishProDAO extends AbstractFacade<EnglishproTbl> {
+   
+    
+    
     @PersistenceUnit(unitName = "ComproOnlinePU")
     private EntityManager em;
+    
+     @Override
+    protected EntityManager getEntityManager()
+    {
+        return em;
+    }
     
     public EnglishProDAO()
     {
         super(EnglishproTbl.class);
     }
     
-    @Override
-    protected EntityManager getEntityManager()
-    {
-        return em;
-    }
+   
     
     public EnglishproTbl getEnglishProData(Integer appID)
     {
@@ -43,4 +46,13 @@ public class EnglishProDAO extends AbstractFacade<EnglishproTbl> {
         
     }
     
+    public void createEnglish(EnglishproTbl en)
+    {
+        em.persist(en);
+    }
+    
+    public void updateEnglish(EnglishproTbl en)
+    {
+        em.merge(en);
+    }
 }

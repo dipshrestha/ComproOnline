@@ -44,5 +44,13 @@ public class GreDAO extends AbstractFacade<GreTbl>{
      
    }
 
+   public void createGre(GreTbl gre)
+   {
+       em.persist(gre);
+   }
    
+   public void updateGre(GreTbl gre)
+   {
+       em.merge(gre);
+   }
 }

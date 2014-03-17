@@ -26,12 +26,11 @@ public class LoginDAO implements Serializable {
         em.merge(user);
     }
 
-    public UserTbl findApplicantByEmailAddr(String username, String password) {
+    public UserTbl findApplicantByEmailAddr(String username) {
 
         try {
             Query userNameQuery = em.createNamedQuery("UserTbl.findByUserEmail");
             userNameQuery.setParameter("userEmail", username);
-            // userNameQuery.setParameter("password", password);
             UserTbl founduser = (UserTbl) userNameQuery.getSingleResult();
 
             return founduser;

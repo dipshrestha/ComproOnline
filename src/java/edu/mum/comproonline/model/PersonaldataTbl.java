@@ -7,6 +7,7 @@
 package edu.mum.comproonline.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -47,7 +49,11 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "PersonaldataTbl.findByPDataEmail", query = "SELECT p FROM PersonaldataTbl p WHERE p.pDataEmail = :pDataEmail"),
     @NamedQuery(name = "PersonaldataTbl.findByPDataVisaStatus", query = "SELECT p FROM PersonaldataTbl p WHERE p.pDataVisaStatus = :pDataVisaStatus")})
 public class PersonaldataTbl implements Serializable {
-    private static final long serialVersionUID = 1L;
+    @Column(name = "pAppID")
+    private Integer pAppID;
+  /*  @OneToMany(mappedBy = "appPDataID")
+    private Collection<ApplicationTbl> applicationTblCollection;
+    private static final long serialVersionUID = 1L;*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -331,5 +337,21 @@ public class PersonaldataTbl implements Serializable {
     public String toString() {
         return "edu.mum.comproonline.model.PersonaldataTbl[ pDataID=" + pDataID + " ]";
     }
+
+    public Integer getPAppID() {
+        return pAppID;
+    }
+
+    public void setPAppID(Integer pAppID) {
+        this.pAppID = pAppID;
+    }
+
+   /* public Collection<ApplicationTbl> getApplicationTblCollection() {
+        return applicationTblCollection;
+    }
+
+    public void setApplicationTblCollection(Collection<ApplicationTbl> applicationTblCollection) {
+        this.applicationTblCollection = applicationTblCollection;
+    }*/
     
 }
