@@ -44,5 +44,13 @@ public class ToeflDAO extends AbstractFacade<ToeflTbl>{
        return (ToeflTbl)result;
    }
 
+   public void createToefl(ToeflTbl t)
+   {
+       em.persist(t);
+   }
    
+    public void updateToefl(ToeflTbl t)
+   {
+       em.merge(t);
+   }
 }

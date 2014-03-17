@@ -45,5 +45,12 @@ public class IeltsDAO extends AbstractFacade<IeltsTbl>{
      
    }
 
-   
+   public void createIelts(IeltsTbl i)
+   {
+       em.persist(i);
+   }
+   public void updateIelts(IeltsTbl i)
+   {
+       em.merge(i);
+   }
 }

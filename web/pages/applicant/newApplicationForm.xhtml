@@ -7,10 +7,284 @@
       xmlns:p="http://primefaces.org/ui">
     
        <ui:composition template="../../resources/templates/applicantTemplate.xhtml">
-    
+    <link href="../../resources/css/custom.css" rel="stylesheet" type="text/css" />
+   
         <ui:define name="body">
-            
-           
+            <h:body>
+          <h:form id="form">
+                <h:panelGrid columns="1" style="width: 100%">
+                    <p:wizard id="wizard" >
+                        <p:tab title="PersonalInformation" id="personalInfo">
+                            <p:panel header="Personal Information">
+                                
+                                <p:messages/>
+                                <h:panelGrid columns="6" >
+
+                                    <h:outputLabel for="firstName" 
+                                                   value="First Name" 
+                                                   styleClass="requiredLbl"/>
+                                    <h:inputText id="firstName" 
+                                                 label="First Name" 
+                                                 value="#{personalDataMB.firstName}" 
+                                                 required="true"/>
+                                    <!--middle Name-->
+                                    <h:outputLabel for="middleName" 
+                                                   value="Middle Name" 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="middleName" 
+                                                 label="Middle Name" 
+                                                 value="#{personalDataMB.middleName}"
+                                                 />
+                                    <!--Last Name-->
+                                    <h:outputLabel for="LastName" 
+                                                   value="Last Name" 
+                                                   styleClass="requiredLbl"/>
+                                    <h:inputText id="LastName" label="Last Name" 
+                                                 value="#{personalDataMB.lastName}" 
+                                                 required="true"/>
+                                    <!--gender-->
+                                     <h:outputLabel for="gender" 
+                                                   value="Gender" 
+                                                   styleClass="requiredLbl"/>
+                                     <h:selectOneMenu  id="gender" value="#{personalDataMB.gender}" required="true"> 
+                                         <f:selectItem id="item1" itemLabel="Female" itemValue="F" />
+                                         <f:selectItem id="item2" itemLabel="Male" itemValue="M" />
+                                    </h:selectOneMenu>
+                                     <!--home_Country-->
+                                      <h:outputLabel for="homeCountry" 
+                                                   value="Home County " 
+                                                   styleClass="optionalLbl"/>
+                                      <h:selectOneMenu  id="homeCountry" value="#{personalDataMB.homeCounty}"> 
+                                          <f:selectItems value="#{personalDataMB.allCountries}" />
+                                    </h:selectOneMenu>
+                                     <!--Country-->
+                                    <h:outputLabel for="country" 
+                                                   value="County " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:selectOneMenu  id="country" value="#{personalDataMB.country}" > 
+                                        <f:selectItems value="#{personalDataMB.allCountries}" />
+                                    </h:selectOneMenu>
+                                     <!--City-->
+                                     <h:outputLabel for="city" 
+                                                   value="City " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="city" label="City " 
+                                                 value="#{personalDataMB.city}" />
+                                     <!--State-->
+                                     <h:outputLabel for="state" 
+                                                   value="State " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="state" label="State " 
+                                                 value="#{personalDataMB.state}" />
+                                    <!--address Line1-->
+                                     <h:outputLabel for="addressLine1" 
+                                                   value="AddressLine 1 " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="addressLine1" label="AddressLine 1 " 
+                                                 value="#{personalDataMB.addressLine1}" />
+                                    <br/>
+                                     <!--address Line2-->
+                                     <h:outputLabel for="addressLine2" 
+                                                   value="AddressLine 2 " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="addressLine2" label="AddressLine 2 " 
+                                                 value="#{personalDataMB.addressLine2}" />
+                                    <!--Zip code-->
+                                     <h:outputLabel for="zipcode" 
+                                                   value="Zip Code " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="zipcode" label="zipCode " 
+                                                 value="#{personalDataMB.zipCode}" />
+                                    
+                                     <!--home phone-->
+                                     <h:outputLabel for="homePhone" 
+                                                   value="Home phone " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="homePhone" label="homePhone " 
+                                                 value="#{personalDataMB.homePhone}" />
+                                    <!--mobile phone-->
+                                     <h:outputLabel for="mobilePhone" 
+                                                   value="Mobile phone " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="mobilePhone" label="mobilePhone " 
+                                                 value="#{personalDataMB.mobilePhone}" />
+                                    
+                                    <!--Skype id-->
+                                     <h:outputLabel for="skypeId" 
+                                                   value="Skype Id " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="skypeId" label="skypeId " 
+                                                 value="#{personalDataMB.skypeId}" />
+                                     <!--Email-->
+                                     <h:outputLabel for="email" 
+                                                   value="E-mail " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="email" label="email " 
+                                                 value="#{personalDataMB.email}" />
+                                    <!--Visa status-->
+                                     <h:outputLabel for="visaStatus" 
+                                                   value="Visa status " 
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="visaStatus" label="visaStatus " 
+                                                 value="#{personalDataMB.visaStatus}" />
+                                </h:panelGrid>
+                                <p:commandButton id="saveButton1"
+                                                 action="#{personalDataMB.savePersonalData()}" value="Save" 
+                                                 ajax="false"/> 
+                            </p:panel>
+                        </p:tab>
+                        
+                        <p:tab title="English Proficiency" id="englishInfo1">
+                          <p:panel header="English Fluency">
+                                <p:messages/>
+                                <h:panelGrid columns="6">
+                                   <!--Reading skill-->
+                                     <h:outputLabel for="readingSkill" 
+                                                   value="How well can you read and write English? " 
+                                                   styleClass="optionalLbl"/>
+                           
+                                     <p:rating value="#{englishProMB.enReadingWritingAbility}" />  
+                                     
+                                      <!--Speaking skill-->
+                                     <h:outputLabel for="speakingSkill" 
+                                                   value="How well can you speak English? " 
+                                                   styleClass="optionalLbl"/>
+                           
+                                     <p:rating value="#{englishProMB.enSpeakingAbility}" />  
+                                     
+                                      <!--Listening skill-->
+                                     <h:outputLabel for="listeningSkill" 
+                                                   value="How well can you understand English? " 
+                                                   styleClass="optionalLbl"/>
+                           
+                                     <p:rating value="#{englishProMB.enListeningAbility}" />  
+                                  
+                                      </h:panelGrid>
+                            </p:panel>
+                             <p:panel header="Test Taken (checks all that apply)">
+                                <p:messages/>
+                                <p:accordionPanel>
+                                    <p:tab title="IELTS">
+                                         <h:panelGrid columns="4" cellpadding="10">
+                                             <h:outputLabel for="iSpeakingScore" 
+                                                   value="Speaking Score" 
+                                                   styleClass="optionalLbl"/>
+                                             <h:inputText id="iSpeakingScore" label="iSpeakingScore " 
+                                                 value="#{englishProMB.ielts.ISpeakingScore}" />
+                                             
+                                              <h:outputLabel for="iReadingScore" 
+                                                   value="Reading Score" 
+                                                   styleClass="optionalLbl"/>
+                                             <h:inputText id="iReadingScore" label="iReadingScore " 
+                                                          value="#{englishProMB.ielts.IReadingScore}" />
+                                             
+                                             <h:outputLabel for="iWritingScore" 
+                                                   value="Writing Score" 
+                                                   styleClass="optionalLbl"/>
+                                             <h:inputText id="iWritingScore" label="iWritingScore " 
+                                                          value="#{englishProMB.ielts.IWritingScore}" />
+                                             
+                                             <h:outputLabel for="iListeningScore" 
+                                                   value="Listening Score" 
+                                                   styleClass="optionalLbl"/>
+                                             <h:inputText id="iListeningScore" label="iListeningScore " 
+                                                          value="#{englishProMB.ielts.IListeningScore}" />
+                                             
+                                             <h:outputLabel for="iYearTaken" 
+                                                   value="Year taken" 
+                                                   styleClass="optionalLbl"/>
+                                             <h:inputText id="iYearTaken" label="iYearTaken " 
+                                                          value="#{englishProMB.ielts.IYearTaken}" />
+                                             
+                                             <h:outputLabel for="iOveralScore" 
+                                                   value="Overal score" 
+                                                   styleClass="optionalLbl"/>
+                                             <h:inputText id="iOveralScore" label="iOveralScore " 
+                                                          value="#{englishProMB.ielts.IOveralScore}" />
+                                            </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="TOEFL">
+                                         <h:panelGrid columns="4" cellpadding="10">
+                                                <h:outputLabel for="tYearTaken" 
+                                                   value="Year taken" 
+                                                   styleClass="optionalLbl"/>
+                                             <h:inputText id="tYearTaken" label="tYearTaken " 
+                                                          value="#{englishProMB.toefl.TYearTaken}" />
+                                             
+                                                <h:outputLabel for="tScore" 
+                                                   value="Overal Score" 
+                                                   styleClass="optionalLbl"/>
+                                             <h:inputText id="tScore" label="tScore " 
+                                                          value="#{englishProMB.toefl.TScore}" />
+                                            </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="GRE">
+                                        <h:panelGrid columns="4" cellpadding="10">
+                                    <h:outputLabel for="gVerbalScore" 
+                                                   value="Verbal Score" 
+                                                   styleClass="optionalLbl"/>
+                                     <h:inputText id="gVerbalScore" label="gVerbalScore " 
+                                                          value="#{englishProMB.gre.GVerbalScore}" />
+                                             
+                                      <h:outputLabel for="gVerbalPercentile" 
+                                                   value="Verbal Percentile" 
+                                                   styleClass="optionalLbl"/>
+                                      <h:inputText id="gVerbalPercentile" label="gVerbalPercentile " 
+                                                   value="#{englishProMB.gre.GVerbalPercentile}" />  
+                                      
+                                       <h:outputLabel for="gQuantitativeScore" 
+                                                   value="Quantitative Score" 
+                                                   styleClass="optionalLbl"/>
+                                      <h:inputText id="gQuantitativeScore" label="gQuantitativeScore " 
+                                                   value="#{englishProMB.gre.GQuantitativeScore}" />  
+                                      
+                                       <h:outputLabel for="gQuantitativePercentile" 
+                                                   value="Quantitative Percentile" 
+                                                   styleClass="optionalLbl"/>
+                                      <h:inputText id="gQuantitativePercentile" label="gQuantitativePercentile " 
+                                                   value="#{englishProMB.gre.GQuantitativePercentile}" />  
+                                      
+                                       
+                                       <h:outputLabel for="gAnalyticalScore" 
+                                                   value="Analytical Score" 
+                                                   styleClass="optionalLbl"/>
+                                      <h:inputText id="gAnalyticalScore" label="gAnalyticalScore " 
+                                                   value="#{englishProMB.gre.GAnalyticalScore}" />  
+                                       <h:outputLabel for="gAnalyticalPercentile" 
+                                                   value="Analytical Percentile" 
+                                                   styleClass="optionalLbl"/>
+                                      <h:inputText id="gAnalyticalPercentile" label="gAnalyticalPercentile " 
+                                                   value="#{englishProMB.gre.GAnalyticalScore}" />  
+                                    </h:panelGrid>
+                                    </p:tab>
+                                </p:accordionPanel>
+                           
+                            </p:panel>
+                            <p:commandButton id="saveButton2"
+                                             action="#{englishProMB.saveEnglishPro()}" value="Save" 
+                                                 ajax="false"/>
+                        </p:tab>
+                        <p:tab title="Education History" id="educationalInfo">
+                            <p:messages/>
+                            <h:panelGrid columns="2">
+                                3rd tab
+                               
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Professional Experience" id="professionalInfo">
+                            <p:messages/>
+                            <h:panelGrid columns="2">
+                                4th tab
+                               
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:wizard>                   
+                </h:panelGrid>
+            </h:form>
+
+    
+                    
+            </h:body>
         </ui:define>
     
        </ui:composition>

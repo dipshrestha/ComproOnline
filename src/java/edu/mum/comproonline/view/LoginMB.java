@@ -40,7 +40,7 @@ public class LoginMB {
         this.errormessage = errormessage;
     }
 
-    public String getUsername() {
+   public String getUsername() {
         return username;
     }
 

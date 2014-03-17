@@ -7,6 +7,7 @@
 package edu.mum.comproonline.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,6 +43,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "UserTbl.findByUserRole", query = "SELECT u FROM UserTbl u WHERE u.userRole = :userRole"),
     @NamedQuery(name = "UserTbl.findByUserStatus", query = "SELECT u FROM UserTbl u WHERE u.userStatus = :userStatus")})
 public class UserTbl implements Serializable {
+    @Column(name = "userRole")
+    private Integer userRole;
+    @OneToMany(mappedBy = "appUserID")
+    private Collection<ApplicationTbl> applicationTblCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,10 +84,6 @@ public class UserTbl implements Serializable {
     @Column(name = "userCreationDate")
     @Temporal(TemporalType.DATE)
     private Date userCreationDate;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "userRole")
-    private int userRole;
     @Column(name = "userStatus")
     private Integer userStatus;
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "appUserID")
@@ -168,14 +170,6 @@ public class UserTbl implements Serializable {
         this.userCreationDate = userCreationDate;
     }
 
-    public int getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(int userRole) {
-        this.userRole = userRole;
-    }
-
     public Integer getUserStatus() {
         return userStatus;
     }
@@ -215,6 +209,22 @@ public class UserTbl implements Serializable {
     @Override
     public String toString() {
         return "edu.mum.comproonline.model.UserTbl[ userID=" + userID + " ]";
+    }
+
+    public Integer getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(Integer userRole) {
+        this.userRole = userRole;
+    }
+
+    public Collection<ApplicationTbl> getApplicationTblCollection() {
+        return applicationTblCollection;
+    }
+
+    public void setApplicationTblCollection(Collection<ApplicationTbl> applicationTblCollection) {
+        this.applicationTblCollection = applicationTblCollection;
     }
     
 }

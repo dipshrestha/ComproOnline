@@ -7,6 +7,7 @@
 package edu.mum.comproonline.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -37,7 +39,20 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "IeltsTbl.findByIYearTaken", query = "SELECT i FROM IeltsTbl i WHERE i.iYearTaken = :iYearTaken"),
     @NamedQuery(name = "IeltsTbl.findByIOveralScore", query = "SELECT i FROM IeltsTbl i WHERE i.iOveralScore = :iOveralScore")})
 public class IeltsTbl implements Serializable {
-    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "iListeningScore")
+    private Double iListeningScore;
+    @Column(name = "iOveralScore")
+    private Double iOveralScore;
+    @Column(name = "iReadingScore")
+    private Double iReadingScore;
+    @Column(name = "iSpeakingScore")
+    private Double iSpeakingScore;
+    @Column(name = "iWritingScore")
+    private Double iWritingScore;
+  /*  @OneToMany(mappedBy = "appIID")
+    private Collection<EnglishproTbl> englishproTblCollection;
+    private static final long serialVersionUID = 1L;*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -45,32 +60,9 @@ public class IeltsTbl implements Serializable {
     private Integer iID;
     @Basic(optional = false)
     //@NotNull
-    @Column(name = "iSpeakingScore")
-    private double iSpeakingScore;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "iReadingScore")
-    private double iReadingScore;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "iWritingScore")
-    private double iWritingScore;
-    @Basic(optional = false)
-    //@NotNull
-    @Column(name = "iListeningScore")
-    private double iListeningScore;
-    @Basic(optional = false)
-    //@NotNull
     @Size(min = 1, max = 10)
     @Column(name = "iYearTaken")
     private String iYearTaken;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "iOveralScore")
-    private double iOveralScore;
-//    @JoinColumn(name = "iEnglishID", referencedColumnName = "enID")
-//    @ManyToOne(optional = false)
-//    private EnglishproTbl iEnglishID;
 
     public IeltsTbl() {
     }
@@ -97,52 +89,12 @@ public class IeltsTbl implements Serializable {
         this.iID = iID;
     }
 
-    public double getISpeakingScore() {
-        return iSpeakingScore;
-    }
-
-    public void setISpeakingScore(double iSpeakingScore) {
-        this.iSpeakingScore = iSpeakingScore;
-    }
-
-    public double getIReadingScore() {
-        return iReadingScore;
-    }
-
-    public void setIReadingScore(double iReadingScore) {
-        this.iReadingScore = iReadingScore;
-    }
-
-    public double getIWritingScore() {
-        return iWritingScore;
-    }
-
-    public void setIWritingScore(double iWritingScore) {
-        this.iWritingScore = iWritingScore;
-    }
-
-    public double getIListeningScore() {
-        return iListeningScore;
-    }
-
-    public void setIListeningScore(double iListeningScore) {
-        this.iListeningScore = iListeningScore;
-    }
-
     public String getIYearTaken() {
         return iYearTaken;
     }
 
     public void setIYearTaken(String iYearTaken) {
         this.iYearTaken = iYearTaken;
-    }
-
-    public double getIOveralScore() {
-        return iOveralScore;
-    }
-
-    public void setIOveralScore(double iOveralScore) {
-        this.iOveralScore = iOveralScore;
     }
 
 //    public EnglishproTbl getIEnglishID() {
@@ -177,5 +129,53 @@ public class IeltsTbl implements Serializable {
     public String toString() {
         return "edu.mum.comproonline.model.IeltsTbl[ iID=" + iID + " ]";
     }
+
+    public Double getIListeningScore() {
+        return iListeningScore;
+    }
+
+    public void setIListeningScore(Double iListeningScore) {
+        this.iListeningScore = iListeningScore;
+    }
+
+    public Double getIOveralScore() {
+        return iOveralScore;
+    }
+
+    public void setIOveralScore(Double iOveralScore) {
+        this.iOveralScore = iOveralScore;
+    }
+
+    public Double getIReadingScore() {
+        return iReadingScore;
+    }
+
+    public void setIReadingScore(Double iReadingScore) {
+        this.iReadingScore = iReadingScore;
+    }
+
+    public Double getISpeakingScore() {
+        return iSpeakingScore;
+    }
+
+    public void setISpeakingScore(Double iSpeakingScore) {
+        this.iSpeakingScore = iSpeakingScore;
+    }
+
+    public Double getIWritingScore() {
+        return iWritingScore;
+    }
+
+    public void setIWritingScore(Double iWritingScore) {
+        this.iWritingScore = iWritingScore;
+    }
+
+  /*  public Collection<EnglishproTbl> getEnglishproTblCollection() {
+        return englishproTblCollection;
+    }
+
+    public void setEnglishproTblCollection(Collection<EnglishproTbl> englishproTblCollection) {
+        this.englishproTblCollection = englishproTblCollection;
+    }*/
     
 }

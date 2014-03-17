@@ -19,7 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
 
 /**
  *
@@ -33,16 +33,16 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "ApplicationTbl.findByAppStatus", query = "SELECT a FROM ApplicationTbl a WHERE a.appStatus = :appStatus"),
     @NamedQuery(name = "ApplicationTbl.findByAppScore", query = "SELECT a FROM ApplicationTbl a WHERE a.appScore = :appScore")})
 public class ApplicationTbl implements Serializable {
+    @Column(name = "appStatus")
+    private Integer appStatus;
+    @Column(name = "appEvalStatus")
+    private Integer appEvalStatus;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "appID")
     private Integer appID;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "appStatus")
-    private int appStatus;
     @Column(name = "appScore")
     private Integer appScore;
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "pExAppID")
@@ -97,14 +97,6 @@ public class ApplicationTbl implements Serializable {
         this.appID = appID;
     }
 
-    public int getAppStatus() {
-        return appStatus;
-    }
-
-    public void setAppStatus(int appStatus) {
-        this.appStatus = appStatus;
-    }
-
     public Integer getAppScore() {
         return appScore;
     }
@@ -153,7 +145,7 @@ public class ApplicationTbl implements Serializable {
         this.educationaldataTbl = educationaldataTbl;
     }
 
-    public EnglishproTbl getEnglishproTblCollection() {
+    public EnglishproTbl getEnglishproTbl() {
         return englishproTbl;
     }
 
@@ -184,6 +176,22 @@ public class ApplicationTbl implements Serializable {
     @Override
     public String toString() {
         return "edu.mum.comproonline.model.ApplicationTbl[ appID=" + appID + " ]";
+    }
+
+    public Integer getAppStatus() {
+        return appStatus;
+    }
+
+    public void setAppStatus(Integer appStatus) {
+        this.appStatus = appStatus;
+    }
+
+    public Integer getAppEvalStatus() {
+        return appEvalStatus;
+    }
+
+    public void setAppEvalStatus(Integer appEvalStatus) {
+        this.appEvalStatus = appEvalStatus;
     }
     
 }

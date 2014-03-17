@@ -7,6 +7,7 @@
 package edu.mum.comproonline.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,7 +35,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ToeflTbl.findByTYearTaken", query = "SELECT t FROM ToeflTbl t WHERE t.tYearTaken = :tYearTaken"),
     @NamedQuery(name = "ToeflTbl.findByTScore", query = "SELECT t FROM ToeflTbl t WHERE t.tScore = :tScore")})
 public class ToeflTbl implements Serializable {
-    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "tScore")
+    private Double tScore;
+   /* @OneToMany(mappedBy = "enTID")
+    private Collection<EnglishproTbl> englishproTblCollection;
+    private static final long serialVersionUID = 1L;*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -44,13 +51,6 @@ public class ToeflTbl implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "tYearTaken")
     private String tYearTaken;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "tScore")
-    private double tScore;
-//    @JoinColumn(name = "tEnglishID", referencedColumnName = "enID")
-//    @ManyToOne(optional = false)
-//    private EnglishproTbl tEnglishID;
 
     public ToeflTbl() {
     }
@@ -79,14 +79,6 @@ public class ToeflTbl implements Serializable {
 
     public void setTYearTaken(String tYearTaken) {
         this.tYearTaken = tYearTaken;
-    }
-
-    public double getTScore() {
-        return tScore;
-    }
-
-    public void setTScore(double tScore) {
-        this.tScore = tScore;
     }
 
 //    public EnglishproTbl getTEnglishID() {
@@ -121,5 +113,21 @@ public class ToeflTbl implements Serializable {
     public String toString() {
         return "edu.mum.comproonline.model.ToeflTbl[ tID=" + tID + " ]";
     }
+
+    public Double getTScore() {
+        return tScore;
+    }
+
+    public void setTScore(Double tScore) {
+        this.tScore = tScore;
+    }
+
+  /*  public Collection<EnglishproTbl> getEnglishproTblCollection() {
+        return englishproTblCollection;
+    }
+
+    public void setEnglishproTblCollection(Collection<EnglishproTbl> englishproTblCollection) {
+        this.englishproTblCollection = englishproTblCollection;
+    }*/
     
 }
