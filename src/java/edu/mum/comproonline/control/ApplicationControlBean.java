@@ -25,7 +25,7 @@ import edu.mum.comproonline.view.EnglishProMB;
 import edu.mum.comproonline.view.PersonalDataMB;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.ejb.Stateless;
 import javax.inject.Named;
 
 
@@ -34,9 +34,9 @@ import javax.inject.Named;
  * @author Nazanin
  */
 @Named("ApplicationControlBean")
-@SessionScoped
+@Stateless
 public class ApplicationControlBean implements Serializable{
-     @EJB
+    @EJB
     LoginDAO login;
     @EJB
     ApplicationDAO appDAO;
@@ -56,8 +56,6 @@ public class ApplicationControlBean implements Serializable{
      public ApplicationControlBean() {
     }
     
-     @EJB
-     private  edu.mum.comproonline.view.LoginMB loginMB;
  
 
      
@@ -65,17 +63,21 @@ public class ApplicationControlBean implements Serializable{
      {
          String returnPage = null;
          UserTbl currentUser = login.findApplicantByEmailAddr(personalMB.getCurrentEmail());
-         ApplicationTbl currentApp = appDAO.getApplicationEntity(currentUser.getUserID());
-         Integer appID = currentApp.getAppID();
-         Integer appStatus =currentApp.getAppStatus();
-         if( appID != null)
+          
+         
+         if( appDAO.hasApplication(currentUser))
          {
+             ApplicationTbl currentApp = appDAO.getApplicationEntity(currentUser.getUserID());
+             Integer appID = currentApp.getAppID();
+             Integer appStatus =currentApp.getAppSubmitStatus();
+             
              if(appStatus == 0) //not submitted
              {
                  
                  try
                  {
                      //fetch data for edit
+                     
                      returnPage =  "newApplicationForm";
                      
                  }catch(Exception e)

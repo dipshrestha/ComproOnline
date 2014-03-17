@@ -31,7 +31,7 @@ public class ApplicationStatusControlBean {
         app = (ApplicationTbl) appDAO.getApplicationIDForStatus(1);
 
         if (app != null) {
-            app.setAppScore(status);
+            app.setAppSubmitStatus(status);
             appDAO.updateStatus(app);
             
             // TODO: Send Email to Applicant
@@ -45,7 +45,7 @@ public class ApplicationStatusControlBean {
 
         if (app != null) {
 
-            app.setAppStatus(status);
+            app.setAppSubmitStatus(status);
             appDAO.updateStatus(app);
             
             //  TODO: Send Email to Applicant

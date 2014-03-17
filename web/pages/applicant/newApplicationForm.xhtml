@@ -12,6 +12,9 @@
         <ui:define name="body">
             <h:body>
           <h:form id="form">
+              <f:metadata>
+                  <f:viewAction action="#{personalDataMB.checkApplication()}"/>
+              </f:metadata>
                 <h:panelGrid columns="1" style="width: 100%">
                     <p:wizard id="wizard" >
                         <p:tab title="PersonalInformation" id="personalInfo">

@@ -6,10 +6,6 @@
 
 package edu.mum.comproonline.model;
 
-import edu.mum.comproonline.model.AbstractFacade;
-import edu.mum.comproonline.model.EnglishproTbl;
-import edu.mum.comproonline.view.EnglishProMB;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.EntityManager;

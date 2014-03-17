@@ -27,7 +27,7 @@ public class PersonalDataMB {
 
    @EJB
    ApplicationControlBean applicationController;
-    private ArrayList<String> allCountries = new ArrayList<String>();
+   private ArrayList<String> allCountries = new ArrayList<String>();
    
     
 

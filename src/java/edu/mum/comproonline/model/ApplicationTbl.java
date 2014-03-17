@@ -30,11 +30,12 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "ApplicationTbl.findAll", query = "SELECT a FROM ApplicationTbl a"),
     @NamedQuery(name = "ApplicationTbl.findByAppID", query = "SELECT a FROM ApplicationTbl a WHERE a.appID = :appID"),
-    @NamedQuery(name = "ApplicationTbl.findByAppStatus", query = "SELECT a FROM ApplicationTbl a WHERE a.appStatus = :appStatus"),
-    @NamedQuery(name = "ApplicationTbl.findByAppScore", query = "SELECT a FROM ApplicationTbl a WHERE a.appScore = :appScore")})
+    @NamedQuery(name = "ApplicationTbl.findByAppSubmitStatus", query = "SELECT a FROM ApplicationTbl a WHERE a.appSubmitStatus = :appSubmitStatus"),
+    @NamedQuery(name = "ApplicationTbl.findByAppEvalStatus", query = "SELECT a FROM ApplicationTbl a WHERE a.appEvalStatus = :appEvalStatus"),
+    @NamedQuery(name = "ApplicationTbl.findByAppScore", query = "SELECT a FROM ApplicationTbl a WHERE a.appEvalScore = :appEvalScore")})
 public class ApplicationTbl implements Serializable {
-    @Column(name = "appStatus")
-    private Integer appStatus;
+    @Column(name = "appSubmitStatus")
+    private Integer appSubmitStatus;
     @Column(name = "appEvalStatus")
     private Integer appEvalStatus;
     private static final long serialVersionUID = 1L;
@@ -43,8 +44,8 @@ public class ApplicationTbl implements Serializable {
     @Basic(optional = false)
     @Column(name = "appID")
     private Integer appID;
-    @Column(name = "appScore")
-    private Integer appScore;
+    @Column(name = "appEvalScore")
+    private Integer appEvalScore;
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "pExAppID")
     //private Collection<ProfessionalexpTbl> professionalexpTblCollection;
     
@@ -86,7 +87,7 @@ public class ApplicationTbl implements Serializable {
 
     public ApplicationTbl(Integer appID, int appStatus) {
         this.appID = appID;
-        this.appStatus = appStatus;
+        this.appSubmitStatus = appStatus;
     }
 
     public Integer getAppID() {
@@ -97,12 +98,12 @@ public class ApplicationTbl implements Serializable {
         this.appID = appID;
     }
 
-    public Integer getAppScore() {
-        return appScore;
+    public Integer getAppEvalScore() {
+        return appEvalScore;
     }
 
-    public void setAppScore(Integer appScore) {
-        this.appScore = appScore;
+    public void setAppEvalScore(Integer appEvalScore) {
+        this.appEvalScore = appEvalScore;
     }
 
 //    public Collection<ProfessionalexpTbl> getProfessionalexpTblCollection() {
@@ -178,12 +179,12 @@ public class ApplicationTbl implements Serializable {
         return "edu.mum.comproonline.model.ApplicationTbl[ appID=" + appID + " ]";
     }
 
-    public Integer getAppStatus() {
-        return appStatus;
+    public Integer getAppSubmitStatus() {
+        return appSubmitStatus;
     }
 
-    public void setAppStatus(Integer appStatus) {
-        this.appStatus = appStatus;
+    public void setAppSubmitStatus(Integer appStatus) {
+        this.appSubmitStatus = appStatus;
     }
 
     public Integer getAppEvalStatus() {

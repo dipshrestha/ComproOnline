@@ -77,7 +77,7 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
         query.setParameter("appID", query);
         Object result = query.getSingleResult();
         ApplicationTbl app = (ApplicationTbl) result;
-        Integer status = app.getAppStatus();
+        Integer status = app.getAppSubmitStatus();
         return status;
     }
 
@@ -114,8 +114,7 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
             String queryString = "select c from ApplicationTbl c where c.appUserID.userID = :userparam";
             Query query = em.createQuery(queryString);
             query.setParameter("userparam", userID);
-           List<ApplicationTbl> result =  query.getResultList();
-            return result.get(0);
+            return (ApplicationTbl)query.getSingleResult();
     }
     
     public boolean checkEnglishID(Integer appID)
@@ -143,5 +142,21 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
     public void updateApplication(ApplicationTbl app)
     {
         em.merge(app);
+    }
+    
+    public boolean hasApplication(UserTbl userID)
+    {
+         String queryString = "select c from ApplicationTbl c where c.appUserID.userID = :userparam";
+            Query query = em.createQuery(queryString);
+            query.setParameter("userparam", userID.getUserID());
+            List<ApplicationTbl> app = query.getResultList();
+            if(app.isEmpty())
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
     }
 }
