@@ -10,9 +10,16 @@
 
         <ui:define name="body">
             <h:form>
+                                <p:messages/>
+                <f:metadata>
+                    <f:viewParam name="userId" value="#{reviewMB.userId}"/>
+                    <f:viewAction action="#{reviewMB.loadApplicationData}"/>
+                </f:metadata>
+                
                 <p:panel>
-                    <f:facet name="header"><h:outputText value="Md. Zahedul A Khan, #{reviewMB.submittedStatus} with score [#{evaluationControlBean.totalScore}/300]"/></f:facet>
-                    <p:fieldset legend="Professional Experience (#{evaluationControlBean.professionalScore}/100)">
+                    <f:facet name="header"><h:outputText value="Md. Zahedul A Khan, #{reviewMB.submittedStatus} with score [#{reviewMB.eval.totalScore}/300]"/></f:facet>
+<br/>
+                    <p:fieldset legend="Professional Experience (#{reviewMB.eval.professionalScore}/100)">
                         <p:dataTable id="Professional">
 
                             <p:column headerText="Company Name">
@@ -25,7 +32,7 @@
                                 <h:outputText value="Sr. Programmer" />
                             </p:column>
 
-                            <p:column headerText="From (#{evaluationControlBean.employmentDurationScore}/50)">
+                            <p:column headerText="From (#{reviewMB.eval.employmentDurationScore}/50)">
                                 <h:outputText value="01/01/2011" />
                             </p:column>
 
@@ -33,7 +40,7 @@
                                 <h:outputText value="01/01/2012" />
                             </p:column>
 
-                            <p:column headerText="Employment Type (#{evaluationControlBean.employmentTypeScore}/50)">
+                            <p:column headerText="Employment Type (#{reviewMB.eval.employmentTypeScore}/50)">
                                 <h:outputText value="FullTime" />
                             </p:column>
 
@@ -42,18 +49,18 @@
                             </p:column>
                         </p:dataTable>
                     </p:fieldset>
-
-                    <p:fieldset legend="Educational Record (#{evaluationControlBean.educationalScore}/100)">
+<br/>
+                    <p:fieldset legend="Educational Record (#{reviewMB.eval.educationalScore}/100)">
                         <p:dataTable>
                             <p:column headerText="Name">
                                 <h:outputText value="AIUB" />
                             </p:column>
 
-                            <p:column headerText="Degree (#{evaluationControlBean.degreeScore}/35)">
+                            <p:column headerText="Degree (#{reviewMB.eval.degreeScore}/35)">
                                 <h:outputText value="BSC in Computer Science" />
                             </p:column>
 
-                            <p:column headerText="Subject (#{evaluationControlBean.speakingScore}/30)">
+                            <p:column headerText="Subject (#{reviewMB.eval.speakingScore}/30)">
                                 <h:outputText value="Introduction to Programming" />
                             </p:column>
 
@@ -69,7 +76,7 @@
                                 <h:outputText value="4" />
                             </p:column>
 
-                            <p:column headerText="GPA (#{evaluationControlBean.gradeScore}/35)">
+                            <p:column headerText="GPA (#{reviewMB.eval.gradeScore}/35)">
                                 <h:outputText value="3.8" />
                             </p:column>
 
@@ -88,12 +95,14 @@
                         </p:dataTable>
 
                     </p:fieldset>
-                    <p:fieldset legend="English Proficiency (#{evaluationControlBean.englishScore}/100)">
-                        <h:outputLabel  style="font-size: medium;color: black;">ABILITY (#{evaluationControlBean.englishAbilityScore}/30)     </h:outputLabel>
-                        <h:outputText  style="font-size: 15px;color: #008cd9" value="ReadWrite (#{evaluationControlBean.readWriteScore}/10) Speak (#{evaluationControlBean.speakingScore}/10) Listening (#{evaluationControlBean.listeningScore}/10)"/>
+<br/>
+
+                    <p:fieldset legend="English Proficiency (#{reviewMB.eval.englishScore}/100)">
+                        <h:outputLabel  style="font-size: medium;color: black;">ABILITY (#{reviewMB.eval.englishAbilityScore}/30)     </h:outputLabel>
+                        <h:outputText  style="font-size: 15px;color: #008cd9" value="ReadWrite (#{reviewMB.eval.readWriteScore}/10) Speak (#{reviewMB.eval.speakingScore}/10) Listening (#{reviewMB.eval.listeningScore}/10)"/>
 
                         <h:panelGrid columns="5"  style="font-size: 15px;color: #008cd9">
-                            <h:outputLabel  style="font-size: medium;color: black;">TOEFL (#{evaluationControlBean.toeflScore}/30)   </h:outputLabel>
+                            <h:outputLabel  style="font-size: medium;color: black;">TOEFL (#{reviewMB.eval.toeflScore}/30)   </h:outputLabel>
 
                             <h:outputLabel>Year Taken:</h:outputLabel>
                             <h:outputText value="01/01/2011"/>
@@ -103,7 +112,7 @@
 
                         </h:panelGrid>
                         <h:panelGrid columns="10"  style="font-size: 15px;color: #008cd9;">
-                            <h:outputLabel  style="font-size: medium;color: black;">GRE (#{evaluationControlBean.greScore}/20)    </h:outputLabel>
+                            <h:outputLabel  style="font-size: medium;color: black;">GRE (#{reviewMB.eval.greScore}/20)    </h:outputLabel>
                             <h:outputLabel>Year:</h:outputLabel>
                             <h:outputText value="01/01/2011"/>
 
@@ -118,7 +127,7 @@
                         </h:panelGrid>
 
                         <h:panelGrid columns="13"  style="font-size: 15px;color: #008cd9">
-                            <h:outputLabel  style="font-size: medium;color: black;">IELTS (#{evaluationControlBean.ieltsScore}/20)   </h:outputLabel>
+                            <h:outputLabel  style="font-size: medium;color: black;">IELTS (#{reviewMB.eval.ieltsScore}/20)   </h:outputLabel>
 
                             <h:outputLabel >Year Taken:</h:outputLabel>
                             <h:outputText value="01/01/2011"/>
@@ -141,12 +150,12 @@
                         </h:panelGrid>
 
                     </p:fieldset>
-
-
                 </p:panel>
                 <br/>
-                    <p:button onclick="javascript: return confirm('REJECT this Application?');" value="Reject" style="color: red; float: right;margin-left: 10px"/>
-                    <p:button onclick="javascript: return confirm('ACCEPT this Application?');" value="Accept" style="color: green; float:right"/>
+                <p:commandButton action="#{reviewMB.setAppStatusRejected()}" value="Reject" style="color: red; float: right;margin-left: 10px"/>
+                <p:commandButton action="#{reviewMB.setAppStatusAccepted()}" value="Accept" style="color: green; float: right;"/>
+                <p:commandButton id="setSubmitBtn" action="#{reviewMB.setSubmitStatusUnsubmitted()}" value="Set Unsubmitted" style="float: left;"/>
+           
             </h:form>
 
         </ui:define>

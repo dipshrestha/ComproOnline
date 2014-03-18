@@ -82,10 +82,10 @@ public class EmailControlBean {
      *
      * @param strTo
      */
-    public void generateEmailForEvaluation(String strTo) {
+    public void generateEmailForEvaluation(String strTo, String status) {
 
-        String strSubject = "Confirmation Email for registration";
-        String strMessage = "Welcome to Compro Online System. " + "Your registration is confirmed.\n"
+        String strSubject = "Evaluation on your application";
+        String strMessage = "Welcome to Compro Online System. " + "Your application has been " + status + ".\n"
                 + "Do not reply this is system generated email.";
 
         sendEmail(strTo, strSubject, strMessage);
@@ -94,13 +94,13 @@ public class EmailControlBean {
 
     /**
      * 
-     *Generate email when status will changed.
+     * Generate email when status will changed.
      * @param strTo
      */
     public void generateEmailForStatus(String strTo) {
 
-        String strSubject = "Confirmation Email for registration";
-        String strMessage = "Welcome to Compro Online System. " + "Your registration is confirmed.\n"
+        String strSubject = "You can edit your application";
+        String strMessage = "Welcome to Compro Online System. " + "Now, you can edit your application.\n"
                 + "Do not reply this is system generated email.";
         sendEmail(strTo, strSubject, strMessage);
 

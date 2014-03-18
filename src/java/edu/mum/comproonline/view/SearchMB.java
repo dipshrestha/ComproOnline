@@ -8,12 +8,17 @@ package edu.mum.comproonline.view;
 import edu.mum.comproonline.model.AppEvaluationStatusEnum;
 import edu.mum.comproonline.model.AppSubmitStatusEnum;
 import edu.mum.comproonline.model.ApplicationTbl;
+import edu.mum.comproonline.model.PersonaldataTbl;
 import edu.mum.comproonline.model.SearchDAO;
+import edu.mum.comproonline.util.Menucountry;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,11 +37,24 @@ public class SearchMB {
     private int evaluationStatus;
 
     private List<ApplicationTbl> applicantionList;
-
+    private ArrayList<String> allCountries = new ArrayList<>();
+    
     public List<ApplicationTbl> getApplicantionList() {
-        return applicantionList;
+        ApplicationTbl app = new ApplicationTbl(1);
+//        app.setAppEvalScore(100);
+//        app.setAppSubmitStatus(20);
+//        app.setPersonaldataTbl(new PersonaldataTbl(200));
+         List<ApplicationTbl> list = new ArrayList<>();
+                 list.add(app);
+         return list;
+        //return applicantionList;
+        //return searchDAO.searchApplication(this);
     }
 
+    public ArrayList<String> getAllCountries() {
+        return allCountries;
+    }
+    
     public void setApplicantionList(List<ApplicationTbl> applicantionList) {
         this.applicantionList = applicantionList;
     }
@@ -49,14 +67,18 @@ public class SearchMB {
         country = "";
         submitStatus = AppSubmitStatusEnum.SUBMITTED.ordinal();
         evaluationStatus = AppEvaluationStatusEnum.UNDECIDED.ordinal();
-        
         applicantionList = new ArrayList<>();
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String filePath = facesContext.getExternalContext().getRealPath("/resources/files/countryList.txt");
+        Menucountry countryUtil = new Menucountry(filePath);        
+        allCountries = countryUtil.getCountries();
 
-        // DELETE
-//        FacesContext facesContext = FacesContext.getCurrentInstance();
-//        String s2 = facesContext.getExternalContext().getRealPath("/resources/files/myApp.properties");
-//        String realPath = s2;
-//        new MyPropertiesReader().doSomeOperation(realPath);
+    }
+    
+    @PostConstruct
+    public void init() {
+        //search();
     }
 
     public String getCountry() {
@@ -92,7 +114,9 @@ public class SearchMB {
     }
 
     public String search() {
-        applicantionList = searchDAO.searchApplication(this);
-        return "/pages/admissionStaff/searchApplicants.xhtml";
+        this.applicantionList = searchDAO.searchApplication(this);
+        //return "/index.html";
+        //return "/pages/admissionStaff/searchApplicants1.xhtml";
+        return "searchApplicants";
     }
 }

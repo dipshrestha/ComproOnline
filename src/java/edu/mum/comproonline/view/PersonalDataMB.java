@@ -89,6 +89,9 @@ public class PersonalDataMB {
         this.application.setPersonaldataTbl(personalData);
         this.application.setAppUserID(user);
         this.applicationDAO.saveApplication(this.application);
+        
+        // show msg
+        JsfUtil.addSuccessMessage("Application Successfully Saved.");
     }
     
 }

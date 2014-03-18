@@ -4,8 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="../../resources/templates/admissionStaffTemplate.xhtml">
 
@@ -20,13 +19,8 @@
                         <p:inputText id="email" value="#{searchMB.email}"/>
 
                         <h:outputLabel for="country" value="Country: " />
-                        <h:selectOneMenu id="country" value="#{searchMB.country}">
-                            <f:selectItem itemLabel="Select One" itemValue="" />
-                            <f:selectItem itemLabel="USA" itemValue="USA" />
-                            <f:selectItem itemLabel="Nepal" itemValue="Nepal" />
-                            <f:selectItem itemLabel="Iran" itemValue="Iran" />
-                            <f:selectItem itemLabel="Bangladesh" itemValue="Bangladesh" />
-                            <f:selectItem itemLabel="Ethopia" itemValue="Ethopia" />
+                        <h:selectOneMenu  id="country" value="#{searchMB.country}"> 
+                            <f:selectItems value="#{searchMB.allCountries}" />
                         </h:selectOneMenu>
 
                         <h:outputText value="Submit Status: " />
@@ -45,17 +39,18 @@
                         </h:selectOneRadio>
 
                     </h:panelGrid>
-                    <p:commandButton value="Submit" update="panel" style="margin-right:20px;" action="#{searchMB.search()}"/>
+                    <p:commandButton id="submit" value="Search" style="margin-right:20px;" action="#{searchMB.search()}"/>
                 </p:panel>
                 <br/><br/>
-                <p:dataTable var="applications" value="#{searchMB.applicantionList}">
+                
+                <p:dataTable var="applications" value="#{searchMB.applicantionList}">                  
                     <f:facet name="header">
-                        Search Result
+                        Search Result                        
                     </f:facet>
                     <p:column headerText="ID">
-                        <h:link outcome="reviewForm.xhtml?id=#{applications.appID}" value="#{applications.appID}" style="color: #ea7d1b"/>
+                        <h:link outcome="reviewForm.xhtml?userId=#{applications.appID}" value="#{applications.appID}" style="color: #ea7d1b"/>
                     </p:column>
-                    
+
                     <p:column headerText="Name">
                         <h:outputLabel value="#{applications.personaldataTbl.PDataFirstName} #{applications.personaldataTbl.PDataLastName}"/>
                     </p:column>
@@ -69,11 +64,11 @@
                     </p:column>
 
                     <p:column headerText="Submit Status">
-                        <h:outputLabel value="#{applications.appStatus eq 0 ? 'Unsubmitted' : 'Submitted'}"/>
+                        <h:outputLabel value="#{applications.appSubmitStatus eq 0 ? 'Unsubmitted' : 'Submitted'}"/>
                     </p:column>
 
                     <p:column headerText="Evaluation Status">
-                        TODO!!
+                        <h:outputLabel value="#{applications.appEvalStatus eq 0 ? 'Undecided' : (applications.appEvalStatus eq 1 ?'Accepted': 'Rejected')}"/>
                     </p:column>
 
                     <br/>

@@ -11,13 +11,11 @@ import edu.mum.comproonline.model.EnglishproTbl;
 import edu.mum.comproonline.model.ProfessionalexpTbl;
 import edu.mum.comproonline.model.ToeflTbl;
 import javax.ejb.Stateless;
-import javax.inject.Named;
 
 /**
  *
  * @author dipesh
  */
-@Named
 @Stateless
 public class EvaluationControlBean {
 
@@ -53,6 +51,7 @@ public class EvaluationControlBean {
         
         return score;
     }
+    
     
     public int getDegreeScore() {
         return -1;

@@ -8,12 +8,21 @@ package edu.mum.comproonline.view;
 
 import edu.mum.comproonline.control.ApplicationStatusControlBean;
 import edu.mum.comproonline.control.EvaluationControlBean;
+import edu.mum.comproonline.model.AppEvaluationStatusEnum;
+import edu.mum.comproonline.model.AppSubmitStatusEnum;
+import edu.mum.comproonline.model.ApplicationDAO;
 import edu.mum.comproonline.model.ApplicationTbl;
 import edu.mum.comproonline.model.EnglishproTbl;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,30 +32,56 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class ReviewMB {
 
+    @EJB
+    ApplicationDAO applicationDAO;
     /**
      * Creates a new instance of ReviewMB
      */
     public ReviewMB() {
+    }
+    
+    public Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+    
+    public void loadApplicationData() {
         // pass value to EJB
-        ApplicationTbl application = new ApplicationTbl(1234);
-        EnglishproTbl englishproTbl = new EnglishproTbl();
-        englishproTbl.setEnListeningAbility(3);
-        englishproTbl.setEnReadingWritingAbility(4);
-        englishproTbl.setEnSpeakingAbility(4);
-        application.setEnglishproTbl(englishproTbl);
-        
-        evaluationControlBean = new EvaluationControlBean(application);
-        //evaluationControlBean.setApplication(new ApplicationTbl());
+        ApplicationTbl app = applicationDAO.getApplication(userId);
+       
+        this.eval.setApplication(app);       
+        Logger.getGlobal().log(Level.INFO, "Loading Application Data for userId...." + userId);
+    }
+    
+    @PostConstruct
+    public void init() {
+        this.eval = new EvaluationControlBean();
     }
     
     @EJB
     private ApplicationStatusControlBean appStatusControl;
     
-    @EJB
-    private EvaluationControlBean evaluationControlBean;
+    //@EJB
+    private EvaluationControlBean eval;
+
+    public EvaluationControlBean getEval() {
+        return eval;
+    }
+
+    public void setEval(EvaluationControlBean eval) {
+        this.eval = eval;
+    }
             
     private Integer submittedStatus;
-
+    
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+    
     public Integer getSubmittedStatus() {
         return submittedStatus;
     }
@@ -55,26 +90,25 @@ public class ReviewMB {
         this.submittedStatus = submittedStatus;
     }
 
-    public String statusAccepted() {
-        
-       appStatusControl.statusAcceptedRejected(1);
-       
+    public String setAppStatusAccepted() {
+       //String email = session.getAttribute("susername").toString(); 
+       appStatusControl.evalStatus(AppEvaluationStatusEnum.ACCEPTED.ordinal(), userId);       
        return "/pages/admissionStaff/reviewForm.xhtml";
-
     }
 
-    public String statusRejected() {
-        
-        appStatusControl.statusAcceptedRejected(2);
-
-        return "/pages/admissionStaff/reviewForm.xhtml";
+    public String setAppStatusRejected() {
+       appStatusControl.evalStatus(AppEvaluationStatusEnum.REJECTED.ordinal(), userId);  
+       return "/pages/admissionStaff/reviewForm.xhtml";
     }
     
-    public String submittedStatus()
+    public String setSubmitStatusUnsubmitted()
     {
-        appStatusControl.submittedStatus(submittedStatus);
-        return "/pages/admissionStaff/reviewForm.xhtml";
+        FacesMessage message = new FacesMessage("Application has been set to UNSUBMITTED!");
+        message.setSeverity(FacesMessage.SEVERITY_ERROR);
+        facesContext.addMessage("setSubmitBtn", message);
         
+        Logger.getGlobal().log(Level.INFO, "setSubmitStatusUnsubmitted...." + userId);
+        appStatusControl.submittedStatus(AppSubmitStatusEnum.UNSUBMITED.ordinal(), userId);
+        return "/pages/admissionStaff/reviewForm.xhtml";
     }
-    
 }

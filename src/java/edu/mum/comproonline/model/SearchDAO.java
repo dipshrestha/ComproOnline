@@ -38,7 +38,6 @@ public class SearchDAO extends AbstractFacade<ApplicationTbl> {
      */
     public List<ApplicationTbl> searchApplication(SearchMB searchMB) {
         
-        // TODO:
         String queryString = "SELECT a FROM ApplicationTbl a WHERE 1=1";
                   
         if(!searchMB.getEmail().trim().isEmpty()) {
@@ -49,14 +48,14 @@ public class SearchDAO extends AbstractFacade<ApplicationTbl> {
         }
         
         if(searchMB.getEvaluationStatus() < AppEvaluationStatusEnum.values().length) {
-            
+            queryString += String.format(" AND a.appEvalStatus = %d ", searchMB.getEvaluationStatus());         
         }
         
         if(searchMB.getSubmitStatus() < AppSubmitStatusEnum.values().length) {
-            queryString += String.format(" AND a.appStatus = %d ", searchMB.getSubmitStatus());
+            queryString += String.format(" AND a.appSubmitStatus = %d ", searchMB.getSubmitStatus());
         }
         
-        Query query = em.createQuery(queryString);
+        Query query = getEntityManager().createQuery(queryString);
         List<ApplicationTbl> result = query.getResultList();
         return result;
     }

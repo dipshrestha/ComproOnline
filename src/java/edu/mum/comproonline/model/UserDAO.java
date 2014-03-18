@@ -16,18 +16,34 @@ import javax.persistence.TypedQuery;
  * @author User
  */
 @Stateless
-public class UserDAO {
+//public class UserDAO {
+//
+//    @PersistenceContext(unitName = "ComproOnlinePU")
+//    private EntityManager em;
+//    //private EntityManagerFactory emf = Persistence.createEntityManagerFactory("SWEMYPRJPU");
+//    //private EntityManager em = emf.createEntityManager();
+//
+//    public void create(UserTbl user) throws Exception {
+//        //em.getTransaction().begin();
+//        em.persist(user);
+//        //em.getTransaction().commit();
+//    }
 
-    @PersistenceContext(unitName = "ComproOnlinePU")
-    private EntityManager em;
-    //private EntityManagerFactory emf = Persistence.createEntityManagerFactory("SWEMYPRJPU");
-    //private EntityManager em = emf.createEntityManager();
+public class UserDAO extends AbstractFacade<UserTbl>{
 
-    public void create(UserTbl user) throws Exception {
-        //em.getTransaction().begin();
-        em.persist(user);
-        //em.getTransaction().commit();
-    }
+   @PersistenceContext(unitName = "ComproOnlinePU")
+   private EntityManager em;
+   public UserDAO()
+   {
+       super(UserTbl.class);
+   }
+   
+   @Override
+   protected EntityManager getEntityManager()
+   {
+       return em;
+   }
+   
 
     public int countEmails(String userEmail) {
 
@@ -72,4 +88,17 @@ public class UserDAO {
         //if(results==null){return null;}
         return results ;
     }
+    
+    /**
+     * @author Dipesh
+     * @param userId
+     * @return 
+     */
+    public UserTbl getUserById(int userId)
+    {
+        Query query = em.createQuery("select c FROM UserTbl c where c.userID = :userId");
+        query.setParameter("userId", userId);
+        UserTbl user =(UserTbl) query.getSingleResult();
+        return user;
+    }    
 }

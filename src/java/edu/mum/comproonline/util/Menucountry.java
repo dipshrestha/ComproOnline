@@ -25,6 +25,7 @@ public class Menucountry {
     {
         this.countryFile = new File(filePath);
         countries = new ArrayList<String>();
+        countries.add("");
     }
     
     /**
