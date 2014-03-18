@@ -47,8 +47,8 @@ public class ToeflTbl implements Serializable {
     @Column(name = "tID")
     private Integer tID;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    //@NotNull
+    //@Size(min = 1, max = 20)
     @Column(name = "tYearTaken")
     private String tYearTaken;
 

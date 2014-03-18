@@ -60,7 +60,7 @@ public class IeltsTbl implements Serializable {
     private Integer iID;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 10)
+    //@Size(min = 1, max = 10)
     @Column(name = "iYearTaken")
     private String iYearTaken;
 

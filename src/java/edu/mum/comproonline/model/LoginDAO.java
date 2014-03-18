@@ -29,7 +29,8 @@ public class LoginDAO implements Serializable {
     public UserTbl findApplicantByEmailAddr(String username) {
 
         try {
-            Query userNameQuery = em.createNamedQuery("UserTbl.findByUserEmail");
+            //Query userNameQuery = em.createNamedQuery("UserTbl.findByUserEmail");
+            Query userNameQuery = em.createQuery("SELECT u FROM UserTbl u WHERE u.userStatus = 1 AND u.userEmail = :userEmail");
             userNameQuery.setParameter("userEmail", username);
             UserTbl founduser = (UserTbl) userNameQuery.getSingleResult();
 

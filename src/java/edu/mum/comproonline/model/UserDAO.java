@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package edu.mum.comproonline.model;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -100,5 +103,44 @@ public class UserDAO extends AbstractFacade<UserTbl>{
         query.setParameter("userId", userId);
         UserTbl user =(UserTbl) query.getSingleResult();
         return user;
+    }
+
+    /**
+     * @author Sunil
+     * @param userEmail
+     * @return
+     */
+    public List<UserTbl> getExpiredUserTbl() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR,-1);
+        Date loginDate = cal.getTime();
+                
+                
+        SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String mdy = dmyFormat.format(loginDate);
+        System.out.println(mdy);
+        
+        //String s=loginDate.toString();
+        TypedQuery<UserTbl> query = em.createQuery("SELECT  a FROM UserTbl a WHERE a.userStatus = 1 AND a.userLastLoginDate < '" + mdy + "'", UserTbl.class);
+        List<UserTbl> results = query.getResultList();
+        //if(results==null){return null;}
+        return results;
+    }
+    
+    
+    /**
+     * delete acc
+     * @author Sunil
+     * @param entity
+     */
+    
+    public UserTbl getUserTblStatus(String userEmail) {
+        TypedQuery<UserTbl> query
+        = em.createQuery("SELECT  a FROM UserTbl a WHERE a.userEmail = '" + userEmail + "'", UserTbl.class);
+        
+        UserTbl status = (UserTbl)query.getSingleResult();
+        //if(results==null){return null;}
+        return status;
     }    
+    
 }
