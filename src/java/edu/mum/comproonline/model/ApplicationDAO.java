@@ -48,7 +48,7 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
      * @param personalData 
      */
     public void savePersonalData(PersonaldataTbl personalData) {
-        if(personalData.getPDataID()!= null && em.find(PersonaldataTbl.class, personalData.getPDataID()) != null) {
+        if( (personalData.getPDataID()!= null) && (em.find(PersonaldataTbl.class, personalData.getPDataID()) != null)) {
             em.merge(personalData);
         }else {
             em.persist(personalData);
@@ -56,16 +56,16 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
     }
     
     public void saveApplication(ApplicationTbl application) {
-        if(application.getAppID() != null && em.find(ApplicationTbl.class, application.getAppID()) != null) {
+        if( (application.getAppID() != null) && (em.find(ApplicationTbl.class, application.getAppID()) != null)) {
             em.merge(application);
         }else {
             em.persist(application);
         }
         //em.persist(application);
     }
-    public void updateApplication(ApplicationTbl application) {
-        em.merge(application);
-    }
+//    public void updateApplication(ApplicationTbl application) {
+//        em.merge(application);
+//    }
     
     /**
      * @Author md. Khan

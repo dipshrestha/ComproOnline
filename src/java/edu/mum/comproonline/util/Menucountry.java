@@ -38,7 +38,7 @@ public class Menucountry {
             String line;
             while ((line = br.readLine()) != null)
             {
-                countries.add(line);
+                countries.add(line.split(":")[1]);
             }
         }
         catch(FileNotFoundException e2)

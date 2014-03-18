@@ -10,6 +10,7 @@ import edu.mum.comproonline.model.ApplicationDAO;
 import edu.mum.comproonline.model.ApplicationTbl;
 import edu.mum.comproonline.model.LoginDAO;
 import edu.mum.comproonline.model.PersonaldataTbl;
+import edu.mum.comproonline.model.UserDAO;
 import edu.mum.comproonline.model.UserTbl;
 import edu.mum.comproonline.util.JsfUtil;
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.Pattern;
 import edu.mum.comproonline.util.Menucountry;
 import javax.annotation.PostConstruct;
 
@@ -32,7 +32,8 @@ public class PersonalDataMB {
 
     @EJB
     ApplicationDAO applicationDAO;
-    
+    @EJB
+    UserDAO userDAO;    
     @EJB
     LoginDAO loginDAO;
     
@@ -42,6 +43,7 @@ public class PersonalDataMB {
 
     private ApplicationTbl application;
     private PersonaldataTbl personalData;
+    private UserTbl user;
 
     public PersonaldataTbl getPersonalData() {
         return personalData;
@@ -67,7 +69,7 @@ public class PersonalDataMB {
     @PostConstruct
     public void init() {
         String email = session.getAttribute("susername").toString();        
-        UserTbl user = loginDAO.findApplicantByEmailAddr(email);
+        this.user = loginDAO.findApplicantByEmailAddr(email);
  
         this.application =  applicationDAO.getApplication(user.getUserID());
         if(application != null) {
@@ -82,8 +84,11 @@ public class PersonalDataMB {
      * Save the current PersonalData
      */
     public void save() {
-        applicationDAO.savePersonalData(this.personalData);
-        applicationDAO.saveApplication(this.application);
+        // BUG: creating two rows of PersonalData when application is created for first time.
+        this.applicationDAO.savePersonalData(this.personalData);
+        this.application.setPersonaldataTbl(personalData);
+        this.application.setAppUserID(user);
+        this.applicationDAO.saveApplication(this.application);
     }
     
 }
