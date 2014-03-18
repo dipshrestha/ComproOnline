@@ -52,8 +52,8 @@ public class PersonaldataTbl implements Serializable {
     @Column(name = "pAppID")
     private Integer pAppID;
   /*  @OneToMany(mappedBy = "appPDataID")
-    private Collection<ApplicationTbl> applicationTblCollection;
-    private static final long serialVersionUID = 1L;*/
+    private Collection<ApplicationTbl> applicationTblCollection;*/
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -75,32 +75,32 @@ public class PersonaldataTbl implements Serializable {
     private String pDataMiddleName;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 10)
+    //@Size(min = 1, max = 10)
     @Column(name = "pDataGender")
     private String pDataGender;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 50)
+    //@Size(min = 1, max = 50)
     @Column(name = "pDataCountry")
     private String pDataCountry;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 50)
+    //@Size(min = 1, max = 50)
     @Column(name = "pDataHomeCountry")
     private String pDataHomeCountry;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 50)
+    //@Size(min = 1, max = 50)
     @Column(name = "pDataCity")
     private String pDataCity;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 50)
+    //@Size(min = 1, max = 50)
     @Column(name = "pDataState")
     private String pDataState;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 200)
+    //@Size(min = 1, max = 200)
     @Column(name = "pDataAddressLine1")
     private String pDataAddressLine1;
     @Basic(optional = false)
@@ -115,7 +115,7 @@ public class PersonaldataTbl implements Serializable {
     private String pDataZipCode;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 50)
+    //@Size(min = 1, max = 50)
     @Column(name = "pDataHomePhone")
     private String pDataHomePhone;
     @Basic(optional = false)
@@ -130,12 +130,12 @@ public class PersonaldataTbl implements Serializable {
     private String pDataSkypeID;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 100)
+    //@Size(min = 1, max = 100)
     @Column(name = "pDataEmail")
     private String pDataEmail;
     @Basic(optional = false)
     //@NotNull
-    @Size(min = 1, max = 50)
+    //@Size(min = 1, max = 50)
     @Column(name = "pDataVisaStatus")
     private String pDataVisaStatus;
     

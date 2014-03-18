@@ -19,10 +19,11 @@ import java.io.FileNotFoundException;
 public class Menucountry {
 
     private ArrayList<String> countries;
-    File countryFile = new File("C:\\Users\\Nazanin\\Documents\\"
-            + "NetBeansProjects\\ComproOnline\\src\\java\\edu\\mum\\comproonline\\util\\countryList.txt");
-    public Menucountry()
+    File countryFile = null;
+    
+    public Menucountry(String filePath)
     {
+        this.countryFile = new File(filePath);
         countries = new ArrayList<String>();
     }
     

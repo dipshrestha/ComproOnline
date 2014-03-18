@@ -42,7 +42,31 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
 
         em.merge(app);
     }
-
+    
+    /***
+     * @Author D.Shrestha
+     * @param personalData 
+     */
+    public void savePersonalData(PersonaldataTbl personalData) {
+        if(personalData.getPDataID()!= null && em.find(PersonaldataTbl.class, personalData.getPDataID()) != null) {
+            em.merge(personalData);
+        }else {
+            em.persist(personalData);
+        }
+    }
+    
+    public void saveApplication(ApplicationTbl application) {
+        if(application.getAppID() != null && em.find(ApplicationTbl.class, application.getAppID()) != null) {
+            em.merge(application);
+        }else {
+            em.persist(application);
+        }
+        //em.persist(application);
+    }
+    public void updateApplication(ApplicationTbl application) {
+        em.merge(application);
+    }
+    
     /**
      * @Author md. Khan
      * @param userID
@@ -63,11 +87,17 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
 
     }
      public ApplicationTbl getApplication(Integer userID) {
-        String queryString = "select c from ApplicationTbl c where c.appUserID.userID = :userparam";
+        ApplicationTbl app = null;
+        try{
+         String queryString = "select c from ApplicationTbl c where c.appUserID.userID = :userparam";
         Query query = em.createQuery(queryString);
-        query.setParameter("userparam", query);
+        query.setParameter("userparam", userID);
         Object result = query.getSingleResult();
-        ApplicationTbl app = (ApplicationTbl) result;
+         app = (ApplicationTbl) result;           
+        }catch(NoResultException ex){
+            //not found
+        }
+
         return app;
     }
 
@@ -139,10 +169,10 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
         em.persist(app);
     }
 
-    public void updateApplication(ApplicationTbl app)
-    {
-        em.merge(app);
-    }
+//    public void updateApplication(ApplicationTbl app)
+//    {
+//        em.merge(app);
+//    }
     
     public boolean hasApplication(UserTbl userID)
     {

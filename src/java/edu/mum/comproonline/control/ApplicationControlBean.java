@@ -50,19 +50,17 @@ public class ApplicationControlBean implements Serializable{
     ToeflDAO toeflDAO;
     @EJB
     PersonalDataDAO personalDAO;
-    
-    
-
+ 
      public ApplicationControlBean() {
     }
-    
- 
-
+     
      
      public String prepareApplication(PersonalDataMB personalMB)
      {
          String returnPage = null;
-         UserTbl currentUser = login.findApplicantByEmailAddr(personalMB.getCurrentEmail());
+         // Edit Dipesh
+         //UserTbl currentUser = login.findApplicantByEmailAddr(personalMB.getCurrentEmail());
+          UserTbl currentUser = login.findApplicantByEmailAddr("dummy");
           
          
          if( appDAO.hasApplication(currentUser))
@@ -113,8 +111,9 @@ public class ApplicationControlBean implements Serializable{
        public void savePersonalData(PersonalDataMB personalMB)
     {
         
-      
-        UserTbl currentUserp = login.findApplicantByEmailAddr(personalMB.getCurrentEmail());
+        // Edit - Dipesh
+        //UserTbl currentUserp = login.findApplicantByEmailAddr(personalMB.getCurrentEmail());
+        UserTbl currentUserp = login.findApplicantByEmailAddr("dummy");
         ApplicationTbl currentApp = appDAO.getApplicationEntity(currentUserp.getUserID());
         Integer appID = currentApp.getAppID();
         boolean doesHaveApp = appDAO.checkPAppID(appID);

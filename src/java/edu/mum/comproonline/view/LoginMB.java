@@ -71,7 +71,7 @@ public class LoginMB {
         } else if (result == UserEnum.APPLICANT.ordinal()) {
             session.setAttribute("susername", this.username);
             session.setAttribute("srole", UserEnum.APPLICANT);
-            facesContext.getExternalContext().redirect("../applicant/applicantHomaPage.xhtml");
+            facesContext.getExternalContext().redirect("../applicant/applicantHomePage.xhtml");
         } else if (result == UserEnum.STAFF.ordinal()) {
             session.setAttribute("susername", this.username);
             session.setAttribute("srole", UserEnum.STAFF);
@@ -84,9 +84,10 @@ public class LoginMB {
 
     }
     
+    //TODO:
     public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login.xhtml?faces-redirect=true";
+        //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "../general/login.xhtml?faces-redirect=true";
     }
 
 }

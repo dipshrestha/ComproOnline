@@ -49,8 +49,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ProfessionalexpTbl.findByPExOtherTime", query = "SELECT p FROM ProfessionalexpTbl p WHERE p.pExOtherTime = :pExOtherTime")})
 public class ProfessionalexpTbl implements Serializable {
    /* @OneToMany(mappedBy = "appPExID")
-    private Collection<ApplicationTbl> applicationTblCollection;
-    private static final long serialVersionUID = 1L;*/
+    private Collection<ApplicationTbl> applicationTblCollection;*/
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)

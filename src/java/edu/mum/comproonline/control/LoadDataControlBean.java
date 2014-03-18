@@ -238,10 +238,10 @@ public class LoadDataControlBean {
          //q1 = q1.setParameter("appID", 100);
     
         //Query q = em.createQuery("SELECT a FROM ApplicationTbl a WHERE a.appID=10", ApplicationTbl.class);
-        Query q = em.createQuery("SELECT a FROM ApplicationTbl a WHERE a.appUserID.userEmail='dip@hotmail.com'", ApplicationTbl.class);
-        ApplicationTbl result = (ApplicationTbl)q.getSingleResult();
-        EducationaldataTbl educationaldataObj = result.getEducationaldataTbl();
-        long id = educationaldataObj.getEdID();
+//        Query q = em.createQuery("SELECT a FROM ApplicationTbl a WHERE a.appUserID.userEmail='dip@hotmail.com'", ApplicationTbl.class);
+//        ApplicationTbl result = (ApplicationTbl)q.getSingleResult();
+//        EducationaldataTbl educationaldataObj = result.getEducationaldataTbl();
+//        long id = educationaldataObj.getEdID();
         
     }
 
