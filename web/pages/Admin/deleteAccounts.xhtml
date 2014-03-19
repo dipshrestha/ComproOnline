@@ -2,96 +2,87 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-          xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    
-       <ui:composition template="../../resources/templates/adminTemplate.xhtml">
-    
+
+    <ui:composition template="../../resources/templates/adminTemplate.xhtml">
+
         <ui:define name="body">
-            
-<!--            login form-->
 
- <h:form id="form1"> 
-     <p:dataTable value="#{deleteOldAppMB.expiredAcc}" var="o" paginator="true" rows="3">
-                <f:facet name="header">  
-                    Expired User List  
-                </f:facet>
-         
-         <p:column>
-                    <f:facet name="header">  
-                        <h:outputText value="User ID" />  
-                    </f:facet>
-             <h:outputText value="#{o.userID}"/>
-                </p:column>
-         
-        
-         
-         <p:column>
-                    <f:facet name="header">  
-                        <h:outputText value="FirstName" />  
-                    </f:facet>
-                    <h:outputText value="#{o.userFirstName}"/>
-                </p:column>
-         <p:column>
-                    <f:facet name="header">  
-                        <h:outputText value="LastName" />  
-                    </f:facet>
-                    <h:outputText value="#{o.userLastName}"/>
-                </p:column>
-         <p:column>
-                    <f:facet name="header">  
-                        <h:outputText value="Email" />  
-                    </f:facet>
-                    <h:outputText value="#{o.userEmail}"/>
-                </p:column>
-         
-         <p:column>
-                    <f:facet name="header">  
-                        <h:outputText value="User Creation Date" />  
-                    </f:facet>
-             <h:outputText value="#{o.userCreationDate}"/>
-                </p:column>
-         
-         <p:column>
-                    <f:facet name="header">  
-                        <h:outputText value="Last Login Date" />  
-                    </f:facet>
-             <h:outputText value="#{o.userLastLoginDate}"/>
-                </p:column>
-         
-         <p:column>
-                    <f:facet name="header">  
-                        <h:outputText value="Status" />  
-                    </f:facet>
-             <h:outputText value="#{o.userRole}"/>
-                </p:column>
-         
-         
-         <p:column >
-                    <f:facet name="header">  
-                        <h:outputText value="Action" />  
-                    </f:facet>
-                    
-             <h:commandLink action="#{deleteOldAppMB.editDataItem(o.userEmail)}" value="Delete">
+            <!--            login form-->
 
-                    
-                    </h:commandLink>
-                </p:column>
-                  
-                       
-         
-         
-         
-         
-                         
-            </p:dataTable>
-        </h:form>
+            <h:form id="form1"> 
+                <p:dataTable value="#{deleteOldAppMB.expiredAcc}" var="o" paginator="true" rows="3">
+                    <f:facet name="header">  
+                        Expired User List  
+                    </f:facet>
 
-<!--            login form-->
-           
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="User ID" />  
+                        </f:facet>
+                        <h:outputText value="#{o.userID}"/>
+                    </p:column>
+
+
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="FirstName" />  
+                        </f:facet>
+                        <h:outputText value="#{o.userFirstName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="LastName" />  
+                        </f:facet>
+                        <h:outputText value="#{o.userLastName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Email" />  
+                        </f:facet>
+                        <h:outputText value="#{o.userEmail}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="User Creation Date" />  
+                        </f:facet>
+                        <h:outputText value="#{o.userCreationDate}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Last Login Date" />  
+                        </f:facet>
+                        <h:outputText value="#{o.userLastLoginDate}"/>
+                    </p:column>
+                    <p:column >
+                        <f:facet name="header">  
+                            <h:outputText value="Action" />  
+                        </f:facet>
+
+                        <h:commandLink action="#{deleteOldAppMB.editDataItem(o.userEmail)}" value="Delete">
+
+
+                        </h:commandLink>
+                    </p:column>
+
+
+
+
+
+
+
+                </p:dataTable>
+            </h:form>
+
+            <!--            login form-->
+
         </ui:define>
-    
-       </ui:composition>
+
+    </ui:composition>
 </html>
 

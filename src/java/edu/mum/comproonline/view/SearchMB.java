@@ -40,15 +40,16 @@ public class SearchMB {
     private ArrayList<String> allCountries = new ArrayList<>();
     
     public List<ApplicationTbl> getApplicantionList() {
-        ApplicationTbl app = new ApplicationTbl(1);
+//        System.out.println(this.getClass() + " : getApplicantionList Called");   
+//        ApplicationTbl app = new ApplicationTbl(1);
 //        app.setAppEvalScore(100);
 //        app.setAppSubmitStatus(20);
 //        app.setPersonaldataTbl(new PersonaldataTbl(200));
-         List<ApplicationTbl> list = new ArrayList<>();
-                 list.add(app);
-         return list;
+//         List<ApplicationTbl> list = new ArrayList<>();
+//                 list.add(app);
+         //return list;
         //return applicantionList;
-        //return searchDAO.searchApplication(this);
+        return searchDAO.searchApplication(this);
     }
 
     public ArrayList<String> getAllCountries() {
@@ -74,11 +75,12 @@ public class SearchMB {
         Menucountry countryUtil = new Menucountry(filePath);        
         allCountries = countryUtil.getCountries();
 
+        System.out.println(this.getClass() + " : SearchMB Called");        
     }
     
     @PostConstruct
     public void init() {
-        //search();
+        System.out.println(this.getClass() + " : init Called");
     }
 
     public String getCountry() {
@@ -115,8 +117,6 @@ public class SearchMB {
 
     public String search() {
         this.applicantionList = searchDAO.searchApplication(this);
-        //return "/index.html";
-        //return "/pages/admissionStaff/searchApplicants1.xhtml";
         return "searchApplicants";
     }
 }

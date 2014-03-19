@@ -139,7 +139,7 @@ public class EvaluationControlBean {
     
     public int getReadWriteScore() {
         EnglishproTbl englishPro = application.getEnglishproTbl();
-        if(englishPro == null) {
+        if((englishPro == null) || (englishPro.getEnReadingWritingAbility() == null)) {
             return 0;
         }
         int score = englishPro.getEnReadingWritingAbility() * 2;
@@ -148,7 +148,7 @@ public class EvaluationControlBean {
     
     public int getListeningScore() {
         EnglishproTbl englishPro = application.getEnglishproTbl();
-        if(englishPro == null) {
+        if((englishPro == null) || (englishPro.getEnListeningAbility() == null)) {
             return 0;
         }
         int score = englishPro.getEnListeningAbility()* 2;
@@ -157,7 +157,7 @@ public class EvaluationControlBean {
     
     public int getSpeakingScore() {
         EnglishproTbl englishPro = application.getEnglishproTbl();
-        if(englishPro == null) {
+        if((englishPro == null) || (englishPro.getEnSpeakingAbility() == null) ) {
             return 0;
         }
         int score = englishPro.getEnSpeakingAbility()* 2;
@@ -169,41 +169,39 @@ public class EvaluationControlBean {
         if(englishPro == null) {
             return 0;
         }
+        
         int score = 0;
         ToeflTbl toefl = englishPro.getToeflTbl();
-        if(toefl != null) {
-            if( toefl.getTScore() < 80 ) {
-                score += 10;
-            }else if(toefl.getTScore() < 100) {
-                score += 20;
-            }else if(toefl.getTScore() <= 120) {
-                score += 30;
-            }
+        if((toefl == null) || (toefl.getTScore() == null)) {
+            return 0;
         }
+        
+        if( toefl.getTScore() < 80 ) {
+            score += 10;
+        }else if(toefl.getTScore() < 100) {
+            score += 20;
+        }else if(toefl.getTScore() <= 120) {
+            score += 30;
+        }
+        
         return score;
     }
     
     public int getGreScore() {
         EnglishproTbl englishPro = application.getEnglishproTbl();
-        if(englishPro == null) {
+        if( (englishPro == null) || (englishPro.getGreTbl() == null)) {
             return 0;
         }
-        int score = 0;
-        if(application.getEnglishproTbl().getGreTbl() != null){
-            score = 20;
-        }
+        int score = 20;
         return score;
     }
     
     public int getIeltsScore() {
         EnglishproTbl englishPro = application.getEnglishproTbl();
-        if(englishPro == null) {
+        if( (englishPro == null) || (englishPro.getIeltsTbl()== null)) {
             return 0;
         }
-        int score = 0;
-        if(application.getEnglishproTbl().getIeltsTbl() != null){
-            score = 20;
-        }
+        int score = 20;
         return score;
     }
 }

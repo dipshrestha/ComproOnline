@@ -39,16 +39,16 @@
                         </h:selectOneRadio>
 
                     </h:panelGrid>
-                    <p:commandButton id="submit" value="Search" style="margin-right:20px;" action="#{searchMB.search()}"/>
+                    <p:commandButton id="submit" ajax="true" value="Search" update="searchResult" style="margin-right:20px;" action="#{searchMB.search()}"/>
                 </p:panel>
                 <br/><br/>
                 
-                <p:dataTable var="applications" value="#{searchMB.applicantionList}">                  
+                <p:dataTable  id="searchResult" var="applications" value="#{searchMB.applicantionList}">                  
                     <f:facet name="header">
                         Search Result                        
                     </f:facet>
-                    <p:column headerText="ID">
-                        <h:link outcome="reviewForm.xhtml?userId=#{applications.appID}" value="#{applications.appID}" style="color: #ea7d1b"/>
+                    <p:column headerText="Application ID">
+                        <h:link outcome="reviewForm.xhtml?appId=#{applications.appID}" value="#{applications.appID}" style="color: #ea7d1b"/>
                     </p:column>
 
                     <p:column headerText="Name">

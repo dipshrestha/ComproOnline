@@ -189,4 +189,15 @@ public class ApplicationDAO extends AbstractFacade<ApplicationTbl> {
                 return true;
             }
     }
+    
+    /**
+     * @auhtor D.Shrestha
+     * @param appId
+     * @return 
+     */
+    public ApplicationTbl getApplicationById(Integer appId){
+        Query query = em.createQuery("select c from ApplicationTbl c where c.appID = :appId");
+        query.setParameter("appId", appId);
+        return (ApplicationTbl)query.getSingleResult();
+    }
 }

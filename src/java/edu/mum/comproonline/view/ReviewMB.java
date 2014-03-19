@@ -40,22 +40,22 @@ public class ReviewMB {
     public ReviewMB() {
     }
     
-    public Integer userId;
+    public Integer appId;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getAppId() {
+        return appId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setAppId(Integer appId) {
+        this.appId = appId;
     }
     
     public void loadApplicationData() {
         // pass value to EJB
-        ApplicationTbl app = applicationDAO.getApplication(userId);
+        ApplicationTbl app = applicationDAO.getApplicationById(appId);
        
         this.eval.setApplication(app);       
-        Logger.getGlobal().log(Level.INFO, "Loading Application Data for userId...." + userId);
+        Logger.getGlobal().log(Level.INFO, "Loading Application Data for userId...." + appId);
     }
     
     @PostConstruct
@@ -92,12 +92,12 @@ public class ReviewMB {
 
     public String setAppStatusAccepted() {
        //String email = session.getAttribute("susername").toString(); 
-       appStatusControl.evalStatus(AppEvaluationStatusEnum.ACCEPTED.ordinal(), userId);       
+       appStatusControl.evalStatus(AppEvaluationStatusEnum.ACCEPTED.ordinal(), appId);       
        return "/pages/admissionStaff/reviewForm.xhtml";
     }
 
     public String setAppStatusRejected() {
-       appStatusControl.evalStatus(AppEvaluationStatusEnum.REJECTED.ordinal(), userId);  
+       appStatusControl.evalStatus(AppEvaluationStatusEnum.REJECTED.ordinal(), appId);  
        return "/pages/admissionStaff/reviewForm.xhtml";
     }
     
@@ -107,8 +107,8 @@ public class ReviewMB {
         message.setSeverity(FacesMessage.SEVERITY_ERROR);
         facesContext.addMessage("setSubmitBtn", message);
         
-        Logger.getGlobal().log(Level.INFO, "setSubmitStatusUnsubmitted...." + userId);
-        appStatusControl.submittedStatus(AppSubmitStatusEnum.UNSUBMITED.ordinal(), userId);
+        Logger.getGlobal().log(Level.INFO, "setSubmitStatusUnsubmitted...." + appId);
+        appStatusControl.submittedStatus(AppSubmitStatusEnum.UNSUBMITED.ordinal(), appId);
         return "/pages/admissionStaff/reviewForm.xhtml";
     }
 }

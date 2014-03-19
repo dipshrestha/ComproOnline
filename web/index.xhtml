@@ -5,18 +5,36 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    
-       <ui:composition template="indexTemplate.xhtml">
-    
+
+    <ui:composition template="indexTemplate.xhtml">
+
         <ui:define name="body">
-            
+<!--
             <a href="faces/pages/applicant/registration.xhtml" style="alignment-adjust: central">Registration</a>
             <br/>
             <a href="faces/pages/general/login.xhtml" style="alignment-adjust: central">Login</a>
-                
+-->
+            <h2>Demo</h2>
+            <h:link outcome="/loadData.xhtml" value="LoadData" /><br/>
+            <h:link outcome="/pages/general/login.xhtml" value="Login" /><br/>
+
+            <h2>Applicant</h2>
+            <h:link outcome="/pages/general/retrievePassword.xhtml" value="RetrievePassword" /><br/>
+            <h:link outcome="/pages/general/registration.xhtml" value="Register" /><br/>            
+            <h:link outcome="/pages/applicant/resetPassword.xhtml" value="ResetPassword" /> <br/>
+            <h:link outcome="/pages/applicant/evaluationStatus.xhtml" value="View Evaluation Status" />           
+
+            <h2>Staff</h2>
+            <h:link outcome="/pages/admissionStaff/searchApplicants.xhtml" value="Search" /> <br/>
+            <h:link outcome="/pages/admissionStaff/resetPassword.xhtml" value="ResetPassword" /><br/>
+            <h:link outcome="/pages/general/retrievePassword.xhtml" value="RetrievePassword" /><br/>            
+
+            <h2>Admin</h2>
+            <h:link outcome="/pages/Admin/deleteAccounts.xhtml" value="Delete Old Accounts"/><br/>
+            <h:link outcome="/pages/Admin/createNewStaff.xhtml" value="Create New Staff"/>
             
         </ui:define>
-    
-       </ui:composition>
+
+    </ui:composition>
 </html>
 
