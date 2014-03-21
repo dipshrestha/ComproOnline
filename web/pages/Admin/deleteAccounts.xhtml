@@ -24,9 +24,9 @@
                         </f:facet>
                         <h:outputText value="#{o.userID}"/>
                     </p:column>
-
-
-
+                    
+                    
+                    
                     <p:column>
                         <f:facet name="header">  
                             <h:outputText value="FirstName" />  
@@ -45,7 +45,6 @@
                         </f:facet>
                         <h:outputText value="#{o.userEmail}"/>
                     </p:column>
-
                     <p:column>
                         <f:facet name="header">  
                             <h:outputText value="User Creation Date" />  
@@ -63,19 +62,9 @@
                         <f:facet name="header">  
                             <h:outputText value="Action" />  
                         </f:facet>
-
                         <h:commandLink action="#{deleteOldAppMB.editDataItem(o.userEmail)}" value="Delete">
-
-
                         </h:commandLink>
                     </p:column>
-
-
-
-
-
-
-
                 </p:dataTable>
             </h:form>
 

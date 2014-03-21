@@ -5,7 +5,8 @@
  */
 package edu.mum.comproonline.view;
 
-import edu.mum.comproonline.control.ApplicationControlBean;
+import edu.mum.comproonline.model.AppEvaluationStatusEnum;
+import edu.mum.comproonline.model.AppSubmitStatusEnum;
 import edu.mum.comproonline.model.ApplicationDAO;
 import edu.mum.comproonline.model.ApplicationTbl;
 import edu.mum.comproonline.model.LoginDAO;
@@ -20,6 +21,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import edu.mum.comproonline.util.Menucountry;
+import java.io.IOException;
 import javax.annotation.PostConstruct;
 
 /**
@@ -85,6 +87,8 @@ public class PersonalDataMB {
      */
     public void save() {
         // BUG: creating two rows of PersonalData when application is created for first time.
+        this.application.setAppEvalStatus(AppEvaluationStatusEnum.UNDECIDED.ordinal());
+        this.application.setAppSubmitStatus(AppSubmitStatusEnum.UNSUBMITED.ordinal());
         this.applicationDAO.savePersonalData(this.personalData);
         this.application.setPersonaldataTbl(personalData);
         this.application.setAppUserID(user);
@@ -93,210 +97,75 @@ public class PersonalDataMB {
         // show msg
         JsfUtil.addSuccessMessage("Application Successfully Saved.");
     }
-    
+    /**
+     * @author Nazanin
+     * @return 
+     */
+    public String getStatus()
+    {
+        String email = session.getAttribute("susername").toString();        
+        this.user = loginDAO.findApplicantByEmailAddr(email);
+        this.application =  applicationDAO.getApplication(user.getUserID());
+        Integer eval =  this.application.getAppEvalStatus();
+        if(eval == AppEvaluationStatusEnum.ACCEPTED.ordinal())
+        {
+            return "Congratulations! You have been accepted.";
+        }
+        else if(eval == AppEvaluationStatusEnum.REJECTED.ordinal())
+        {
+            return "Sorry! You have been rejected.";
+        }
+        else
+        {
+            return "Undecided.";
+        }
+    }
+    /**
+     * @author Nazanin
+     */
+    public String submit()
+    {
+        this.application.setAppSubmitStatus(AppSubmitStatusEnum.SUBMITTED.ordinal());
+        return"applicationConfirmation";
+    }
+    /**
+     * @author Nazanin
+     * @return 
+     */
+    public void prepareApp()
+    {
+        String returnPage;
+        FacesContext facesContext =FacesContext.getCurrentInstance();
+        String email = session.getAttribute("susername").toString();        
+        this.user = loginDAO.findApplicantByEmailAddr(email);
+        this.application =  applicationDAO.getApplication(user.getUserID());
+        Integer submit =  this.application.getAppSubmitStatus();
+        if(submit == AppSubmitStatusEnum.SUBMITTED.ordinal())
+        {
+           try{
+            facesContext.getExternalContext().redirect("applicationConfirmation.xhtml");
+            return;
+           }
+           catch(IOException e)
+           {
+               JsfUtil.addErrorMessage("Error redirecting to page.");
+           }
+            
+        }
+        else
+        {
+            try{
+            facesContext.getExternalContext().redirect("newApplicationForm");
+            return;
+           }
+           catch(IOException e)
+           {
+               JsfUtil.addErrorMessage("Error redirecting to page.");
+           }
+           
+        }
+        
+    }
+  
+     
 }
-
-//public class PersonalDataMB {
-//
-//   @EJB
-//   ApplicationControlBean applicationController;
-//   private ArrayList<String> allCountries = new ArrayList<String>();
-//   
-//    
-//
-//    public ArrayList<String> getAllCountries() {
-//        return allCountries;
-//    }
-//  
-//    public PersonalDataMB() 
-//    {
-//       String filePath = facesContext.getExternalContext().getRealPath("/resources/files/countryList.txt");
-//       Menucountry countryUtil = new Menucountry(filePath);
-//       allCountries = countryUtil.getCountries();
-//    }
-//    
-//    private String firstName;
-//    private String middleName;
-//    private String lastName;
-//    private String gender;
-//    private String homeCounty;
-//    private String country;
-//    private String city;
-//    private String state;
-//    private String addressLine1;
-//    private String addressLine2;
-//    private String zipCode;
-//    private String homePhone;
-//    private String mobilePhone;
-//    private String skypeId;
-//    @Pattern(regexp = "^[\\w\\-]([\\.\\w])+[\\w]+@([\\w\\-]+\\.)+[a-zA-Z]{2,4}$", message = "Invalid email format")
-//    private String email;
-//    private String visaStatus;
-//
-//    
-//    FacesContext facesContext = FacesContext.getCurrentInstance();
-//    HttpSession session = (HttpSession)facesContext.getExternalContext().getSession(true);
-//
-//    
-//    public String getCurrentEmail() 
-//    {
-//        return session.getAttribute("susername").toString();
-//    }
-//    
-//   
-//
-//   
-//
-//    public void setAllCountries(ArrayList<String> allCountries) {
-//        this.allCountries = allCountries;
-//    }
-//   
-//
-//    public void setFirstName(String firstName) {
-//        this.firstName = firstName;
-//    }
-//
-//    public void setMiddleName(String middleName) {
-//        this.middleName = middleName;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
-//
-//    public void setGender(String gender) {
-//        this.gender = gender;
-//    }
-//
-//    public void setHomeCounty(String homeCounty) {
-//        this.homeCounty = homeCounty;
-//    }
-//
-//    public void setCountry(String country) {
-//        this.country = country;
-//    }
-//
-//    public void setCity(String city) {
-//        this.city = city;
-//    }
-//
-//    public void setState(String state) {
-//        this.state = state;
-//    }
-//
-//    public void setAddressLine1(String addressLine1) {
-//        this.addressLine1 = addressLine1;
-//    }
-//
-//    public void setAddressLine2(String addressLine2) {
-//        this.addressLine2 = addressLine2;
-//    }
-//
-//    public void setZipCode(String zipCode) {
-//        this.zipCode = zipCode;
-//    }
-//
-//    public void setHomePhone(String homePhone) {
-//        this.homePhone = homePhone;
-//    }
-//
-//    public void setMobilePhone(String mobilePhone) {
-//        this.mobilePhone = mobilePhone;
-//    }
-//
-//    public void setSkypeId(String skypeId) {
-//        this.skypeId = skypeId;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//    public void setVisaStatus(String visaStatus) {
-//        this.visaStatus = visaStatus;
-//    }
-// 
-//
-//
-//
-//    public String getFirstName() {
-//        return firstName;
-//    }
-//
-//    public String getMiddleName() {
-//        return middleName;
-//    }
-//
-//    public String getLastName() {
-//        return lastName;
-//    }
-//
-//    public String getGender() {
-//        return gender;
-//    }
-//
-//    public String getHomeCounty() {
-//        return homeCounty;
-//    }
-//
-//    public String getCountry() {
-//        return country;
-//    }
-//
-//    public String getCity() {
-//        return city;
-//    }
-//
-//    public String getState() {
-//        return state;
-//    }
-//
-//    public String getAddressLine1() {
-//        return addressLine1;
-//    }
-//
-//    public String getAddressLine2() {
-//        return addressLine2;
-//    }
-//
-//    public String getZipCode() {
-//        return zipCode;
-//    }
-//
-//    public String getHomePhone() {
-//        return homePhone;
-//    }
-//
-//    public String getMobilePhone() {
-//        return mobilePhone;
-//    }
-//
-//    public String getSkypeId() {
-//        return skypeId;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public String getVisaStatus() {
-//        return visaStatus;
-//    }
-//   
-//    
-//    
-//     public void savePersonalData() 
-//     {
-//        JsfUtil.addSuccessMessage(getCurrentEmail());
-//        applicationController.savePersonalData(this);
-//        JsfUtil.addSuccessMessage("Data Saved Successfully");
-//        
-//      }
-//     public void checkApplication()
-//     {
-//         applicationController.prepareApplication(this);
-//     }
-//    
-//    
-//    
-//}

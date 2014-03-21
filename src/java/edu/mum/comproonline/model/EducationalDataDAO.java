@@ -47,6 +47,12 @@ public class EducationalDataDAO extends AbstractFacade<EducationaldataTbl>{
    }
    
    
-   
+   public void saveEducationalData(EducationaldataTbl educationalData) {
+        if( (educationalData.getEdID()!= null) && (em.find(EnglishproTbl.class, educationalData.getEdID()) != null)) {
+            em.merge(educationalData);
+        }else {
+            em.persist(educationalData);
+        }
+    }
    
 }

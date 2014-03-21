@@ -7,8 +7,8 @@
 package edu.mum.comproonline.model;
 
 import javax.ejb.Stateless;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
@@ -20,7 +20,7 @@ public class EnglishProDAO extends AbstractFacade<EnglishproTbl> {
    
     
     
-    @PersistenceUnit(unitName = "ComproOnlinePU")
+    @PersistenceContext(unitName = "ComproOnlinePU")
     private EntityManager em;
     
      @Override
@@ -46,13 +46,12 @@ public class EnglishProDAO extends AbstractFacade<EnglishproTbl> {
         
     }
     
-    public void createEnglish(EnglishproTbl en)
-    {
-        em.persist(en);
-    }
     
-    public void updateEnglish(EnglishproTbl en)
-    {
-        em.merge(en);
+     public void saveEnglishData(EnglishproTbl englishData) {
+        if( (englishData.getEnID()!= null) && (em.find(EnglishproTbl.class, englishData.getEnID()) != null)) {
+            em.merge(englishData);
+        }else {
+            em.persist(englishData);
+        }
     }
 }

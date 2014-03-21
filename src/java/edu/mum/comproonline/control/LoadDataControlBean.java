@@ -14,7 +14,6 @@ import edu.mum.comproonline.model.GreTbl;
 import edu.mum.comproonline.model.InstituteTbl;
 import edu.mum.comproonline.model.PersonaldataTbl;
 import edu.mum.comproonline.model.ProfessionalexpTbl;
-import edu.mum.comproonline.model.UserDAO;
 import edu.mum.comproonline.model.UserEnum;
 import edu.mum.comproonline.model.UserTbl;
 import edu.mum.comproonline.util.HashServices;
@@ -93,7 +92,7 @@ public class LoadDataControlBean {
         admin.setUserStatus(1); // 0: inactive, 1: active
         em.persist(admin);
         
-        
+/*        
         // ------------------------------------------ //
         //         Adding the Professiona Data
         // ------------------------------------------ //
@@ -242,6 +241,7 @@ public class LoadDataControlBean {
 //        ApplicationTbl result = (ApplicationTbl)q.getSingleResult();
 //        EducationaldataTbl educationaldataObj = result.getEducationaldataTbl();
 //        long id = educationaldataObj.getEdID();
+*/
         
     }
 

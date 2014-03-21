@@ -43,5 +43,13 @@ public class InstituteDAO extends AbstractFacade<InstituteTbl> {
         List<InstituteTbl> institutes = query.getResultList();
         return institutes;  
     }
+    
+    public void saveInstituteData(InstituteTbl instituteData) {
+        if( (instituteData.getInstituteID()!= null) && (em.find(InstituteTbl.class, instituteData.getInstituteID()) != null)) {
+            em.merge(instituteData);
+        }else {
+            em.persist(instituteData);
+        }
+    }    
 }
 

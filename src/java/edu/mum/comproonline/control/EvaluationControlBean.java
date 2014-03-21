@@ -6,6 +6,7 @@
 
 package edu.mum.comproonline.control;
 
+import edu.mum.comproonline.model.AppEvaluationStatusEnum;
 import edu.mum.comproonline.model.ApplicationTbl;
 import edu.mum.comproonline.model.EnglishproTbl;
 import edu.mum.comproonline.model.ProfessionalexpTbl;
@@ -35,6 +36,20 @@ public class EvaluationControlBean {
 
     public EvaluationControlBean() {
         this.application = new ApplicationTbl();
+    }
+    
+    /**
+     * Get evaluation for the application
+     * @return evaluation for the application
+     */
+    public int getEvaluation() {
+        int totalScore = getTotalScore();
+        if(totalScore <100){
+            return AppEvaluationStatusEnum.REJECTED.ordinal();
+        }else if(totalScore > 150) {
+            return AppEvaluationStatusEnum.ACCEPTED.ordinal();    
+        }
+        return AppEvaluationStatusEnum.UNDECIDED.ordinal();
     }
     
     public int getTotalScore() {

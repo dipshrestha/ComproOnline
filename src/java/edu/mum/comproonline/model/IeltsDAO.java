@@ -3,8 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 package edu.mum.comproonline.model;
 
 import edu.mum.comproonline.model.AbstractFacade;
@@ -19,38 +17,34 @@ import javax.persistence.Query;
  * @author Nazanin
  */
 @Stateless
-public class IeltsDAO extends AbstractFacade<IeltsTbl>{
+public class IeltsDAO extends AbstractFacade<IeltsTbl> {
 
-   @PersistenceContext(unitName = "ComproOnlinePU")
-   private EntityManager em;
-   public IeltsDAO()
-   {
-       super(IeltsTbl.class);
-   }
-   
-   @Override
-   protected EntityManager getEntityManager()
-   {
-       return em;
-   }
-   
-   
-   public IeltsTbl getGreData(Integer enID)
-   {
-       String queryString = "select c from ielts_tbl c where c.enID = :enID";
-       Query query = em.createQuery(queryString);
-       query.setParameter(":enID", query);
-       Object result = query.getSingleResult();
-       return (IeltsTbl)result;
-     
-   }
+    @PersistenceContext(unitName = "ComproOnlinePU")
+    private EntityManager em;
 
-   public void createIelts(IeltsTbl i)
-   {
-       em.persist(i);
-   }
-   public void updateIelts(IeltsTbl i)
-   {
-       em.merge(i);
-   }
+    public IeltsDAO() {
+        super(IeltsTbl.class);
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public IeltsTbl getGreData(Integer enID) {
+        String queryString = "select c from ielts_tbl c where c.enID = :enID";
+        Query query = em.createQuery(queryString);
+        query.setParameter(":enID", query);
+        Object result = query.getSingleResult();
+        return (IeltsTbl) result;
+
+    }
+
+    public void saveIeltsData(IeltsTbl ielts) {
+        if ((ielts.getIID() != null) && (em.find(ToeflTbl.class, ielts.getIID()) != null)) {
+            em.merge(ielts);
+        } else {
+            em.persist(ielts);
+        }
+    }
 }
